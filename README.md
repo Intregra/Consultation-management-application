@@ -1,4 +1,4 @@
-# Konzultaèka
+# KonzultaÄka
 
 Web application that helps lectors easily manage their consultation appointments and let student to sign on those appointments.
 
