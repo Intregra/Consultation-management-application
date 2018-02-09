@@ -35,6 +35,7 @@ For starters, registered lector has to create a consultation. Then others may lo
 ## Installation
 The application should be hosted on a **server** and requires at least **PHP** version **5.6** and **MySQL** database version **5.0**. You will need access to **cron** service in order for notifications to work properly. You will also have to create a new database that can usually be managed through your webhosing. Or you can use already existing one on your server. You will need the name of the database, username and password to access the database and hostname of your database server. You will also have to create new e-mail for application to send info and notifications from.
 Several constants have to be redefined in `local_settings.php`.
+
 | Constant | Meaning |
 |----|----|
 | `db_servername` | address of your database server |
