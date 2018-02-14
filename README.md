@@ -44,6 +44,7 @@ Several constants have to be redefined in `local_settings.php`.
 | `db_dbname` | name of your database |
 | `HOME_URL` | URL address to access the `index.php` |
 | `APP_EMAIL` | existing e-mail for app |
+| `DEFAULT_LANG` | default language of the app (currently only `cze` or `eng`) |
 
 Database tables will be created automatically if they don't already exist (which means if you decide for whatever reason to delete a table, it will be created anew when someone visits application page).
 
