@@ -1,0 +1,1357 @@
+@font-face {
+	font-family: 'HindMadurai';
+	src: url('../fonts/HindMadurai-Regular.ttf') format('truetype');
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'HindMadurai';
+	src: url('../fonts/HindMadurai-Bold.ttf') format('truetype');
+	font-style: normal;
+	font-weight: bold;
+}
+/*@font-face {
+	font-family: 'HindMadurai';
+	src: url('../fonts/HindMadurai-Italic.ttf') format('truetype');
+	font-style: italic;
+}
+@font-face {
+	font-family: 'HindMadurai';
+	src: url('../fonts/HindMadurai-BoldItalic.ttf') format('truetype');
+	font-style: italic;
+	font-weight: bold;
+}*/
+
+body {
+	font-family: 'HindMadurai', sans-serif;
+	font-size: 16px;
+}
+
+a,
+.look-like-link {
+	border: none;
+	background: none;
+	color: #337ab7;
+	font-weight: normal;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+a:hover,
+.look-like-link:hover {
+	text-decoration: none;
+	background: none;
+	color: #F57C00;
+}
+
+/*
+button {
+	background: #FFCC80;
+	border: none;
+	border-bottom: 2px solid #F57C00;
+	border-right: 2px solid #F57C00;
+	outline: none;
+}*/
+
+button,
+.look-like-button {
+	outline: none;
+	text-decoration: none;
+	border: 1px solid white;
+	border-radius: 0;
+	padding: 6px 15px 4px;
+	background: #F57C00;
+	font-weight: bold;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+	color: white;
+	display: inline-block;
+}
+
+.look-like-button:hover {
+	color: #fff;
+}
+
+button:hover,
+.look-like-button:hover {
+	background-color: #FFB74D;
+}
+
+button > .glyphicon {
+	position: relative;
+	top: 2px;
+}
+
+.btn-no {
+	background-color: #D50000;
+}
+
+.btn-no:hover {
+	background-color: #ff6666;
+}
+
+.btn-yes {
+	background-color: #43A047;
+}
+
+.btn-yes:hover {
+	background-color: #81C784;
+}
+
+input[type=text],
+input[type=password] {
+	outline: none;
+	height: 34px;
+	padding: 3px 6px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: box-shadow 0.3s, border 0.3s;
+	transition: box-shadow 0.3s, border 0.3s;
+}
+
+textarea {
+	outline: none;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {
+	border: 1px solid #F57C00;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(245, 124, 0,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(245, 124, 0,.6);
+}
+
+label.checkbox-label {
+	cursor: pointer;
+	font-weight: normal;
+	padding-left: 5px;
+	text-align: left;
+}
+
+.checkbox-label input[type=checkbox] {
+	width: 15px;
+	height: 15px;
+	visibility: hidden;
+}
+
+/*input[type=checkbox]:before {
+	content: ' ';
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #999;
+	margin-top: 2px;
+	margin-right: 5px;
+	margin-left: -5px;
+	background: white;
+	cursor: pointer;
+	visibility: visible;
+}
+
+input[type=checkbox]:after {
+	content: '\e013';
+	position: absolute;
+	font-family: 'Glyphicons Halflings';
+	color: #2962FF;
+	margin-left: -19px;
+	margin-top: -2px;
+}
+
+input[type=checkbox]:checked:after {
+	visibility: visible;
+}*/
+
+.checkbox-replacement {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #999;
+	margin-top: 6px;
+	margin-left: -20px;
+	background: white;
+	cursor: pointer;
+}
+
+.checkbox-replacement:after {
+	content: '\e013';
+	position: absolute;
+	font-family: 'Glyphicons Halflings';
+	color: #2962FF;
+	margin-top: -6px;
+	visibility: hidden;
+}
+
+input[type=checkbox]:checked + .checkbox-replacement:after {
+	visibility: visible;
+}
+
+.checkbox-label:hover .checkbox-replacement {
+	border-color: #F57C00;
+	-webkit-box-shadow: 0 0 8px rgba(245, 124, 0,.6);
+	box-shadow: 0 0 8px rgba(245, 124, 0,.6);
+}
+
+.modal .modal-close-button {
+	background: none;
+	color: #aaa;
+	font-size: 20px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 5;
+}
+
+.modal .modal-close-button:hover {
+	color: #333;
+}
+
+.modal .modal-content {
+	padding: 20px;
+}
+
+.modal .modal-content button:not(.va_control) {
+	margin: 5px;
+}
+
+.modal .modal-content .kon-info {
+	text-align: left;
+	font-size: 14px;
+	color: #999;
+	padding-bottom: 15px;
+}
+
+.modal .choose-buttons {
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.modal .choose-buttons button {
+	display: block;
+	margin-top: 8px;
+	width: 100%;
+}
+
+#modal_confirm_dialog .message_receivers {
+	text-align: center;
+	display: inline-block;
+}
+
+#modal_confirm_dialog .message_receivers label {
+	display: block;
+}
+
+#modal_confirm_dialog textarea {
+	resize: none;
+	width: 80%;
+	margin-top: 5px;
+}
+
+.va_control {
+	border: none;
+	font-size: 17px;
+	padding: 5px;
+	height: 34px;
+}
+
+.va_right .glyphicon {
+	left: 1px;
+}
+
+.notif_options_area {
+	margin-top: 10px;
+	text-align: left;
+	display: inline-block;
+}
+
+.history_area {
+	white-space: pre-wrap;
+	text-align: left;
+}
+
+.history_area .row {
+	border-bottom: 2px solid #bbb;
+	margin-top: -30px;
+}
+
+.history_area .row > div {
+	position: relative;
+	top: 15px;
+}
+
+.dropdown {
+	display: inline-block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #FFB74D;
+}
+
+.dropdown .dropcont {
+	display: none;
+	position: absolute;
+	z-index: 16;
+	background: #FFA726;
+	border: 1px solid white;
+}
+
+.dropdown .dropbtn:hover + .dropcont,
+.dropdown .dropcont:hover {
+	display: block;
+}
+
+.dropdown .dropcont a {
+	display: block;
+	padding: 5px 10px;
+	color: white;
+	font-weight: bold;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.dropdown .dropcont a:hover {
+	background: #F57C00;
+}
+
+.dropdown .dropcont .glyphicon {
+	top: 2px;
+}
+
+/* * * ** * *
+ * Language *
+ * * * ** * */
+
+#lang_sel {
+	position: absolute;
+	z-index: 27;
+	right: 0;
+	top: 0;
+}
+
+#lang_sel .dropcont a {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+/* * * ** * *
+ * Feedback *
+ * * * ** * */
+
+.feedback_button {
+	position: fixed;
+	z-index: 15;
+	bottom: 0;
+	right: 20px;
+}
+
+.subject_header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 5px;
+}
+
+#feedback_textarea {
+	display: block;
+	width: 100%;
+}
+
+.feedback_note {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #0D47A1;
+	padding: 20px 130px 10px 10px;
+	color: white;
+}
+
+.feedback_note a {
+	color: #F57C00;
+}
+
+.feedback_note a:hover {
+	color: #FFB74D;
+}
+
+.feedback_note .feed_close {
+	position: absolute;
+	right: 20px;
+	margin-top: -20px;
+	border: none;
+	background: none;
+	font-weight: bold;
+}
+
+.errors,
+.top_messages {
+	background-color: #D50000;
+	padding: 10px 0 5px 0;
+	color: white;
+	font-weight: bold;
+	width: 100%;
+	z-index: 55;
+	text-align: center;
+	position: relative;
+}
+
+.top_messages {
+	background-color: #0D47A1;
+}
+
+.errors p,
+.top_messages p {
+	padding: 0 40px;
+}
+
+.errors .close_button,
+.top_messages .close_button {
+	position: absolute;
+	cursor: pointer;
+	font-size: 20px;
+	right: 20px;
+	top: 7px;
+}
+
+input.wrong_val {
+	border-color: red;
+	color: red;
+}
+
+input.wrong_val:focus {
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255,0,0,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255,0,0,.6);
+}
+
+input + .input-error {
+	font-size: 14px;
+	background: red;
+	color: white;
+	height: 0;
+	overflow: hidden;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+input.wrong_val + .input-error {
+	height: 20px;
+}
+
+@media (max-width: 800px) {
+	.feedback_note {
+		padding: 30px 10px 40px 10px;
+	}
+	.feedback_note .feed_close {
+		margin-top: -30px;
+	}
+}
+
+/* * * * * * *
+ * jQuery UI *
+ * * * * * * */
+
+.ui-widget {
+	font-family: 'Play', sans-serif;
+}
+
+.ui-widget-header {
+	background: #FFA726;
+	border-color: #FFA726;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+	text-align: center;
+}
+
+.ui-datepicker-other-month .ui-state-default {
+	background: #eee;
+}
+
+.ui-datepicker .ui-corner-all {
+	border-radius: 0;
+}
+
+.ui-datepicker-next,
+.ui-datepicker-prev {
+	cursor: pointer;
+}
+
+.ui-autocomplete {
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	font-family: inherit;
+	white-space: nowrap;
+	z-index: 1055;
+}
+
+#kantor_selection .kan_sel_input input {
+	width: 300px;
+}
+
+#kantor_selection .kan_sel_filter input {
+	width: 150px;
+}
+
+.ui-autocomplete-input[type=text] {
+	background-image:
+		-webkit-linear-gradient(bottom left, transparent 50%, gray 50%),
+		-webkit-linear-gradient(top left, gray 50%, transparent 50%);
+	background-image:
+		-o-linear-gradient(bottom left, transparent 50%, gray 50%),
+		-o-linear-gradient(top left, gray 50%, transparent 50%);
+	background-image:
+		linear-gradient(to top right, transparent 50%, gray 50%),
+		linear-gradient(to bottom right, gray 50%, transparent 50%);
+	background-position:
+		calc(100% - 16px),
+		calc(100% - 10px);
+	background-size:
+		6px 6px,
+		6px 6px,
+		1px 1.5em;
+	background-repeat: no-repeat;
+	padding-right: 25px;
+}
+
+.ui-autocomplete.ui-widget-content > li:not(:last-of-type):after {
+	content: "";
+	position: absolute;
+	z-index: 15;
+	height: 1px;
+	width: 80%;
+	left: 10%;
+	margin-top: 3px;
+	border-bottom: 1px solid #F57C00;
+}
+
+.ui-autocomplete.ui-widget-content .ui-state-active {
+	font-weight: normal;
+	color: #F57C00;
+	margin: 0;
+	border: none;
+}
+
+.ui-autocomplete.ui-widget-content > li {
+	font-size: 16px;
+	line-height: 16px;
+	padding: 3px 0;
+}
+
+.ui-autocomplete.ui-widget-content .autocomp_kantor_login {
+	padding-left: 20px;
+}
+
+/* * * * *
+ * Login *
+ * * * * */
+
+.login-bg {
+	background-color: #FFA726;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.login-fg {
+	text-align: center;
+	position: relative;
+}
+
+.login-fg input[type=text],
+.login-fg input[type=password] {
+	width: 100%;
+}
+
+.login-fg > form {
+	max-width: 500px;
+	padding: 50px;
+	padding-bottom: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 200px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.login-fg > form > div {
+	margin-bottom: 15px;
+}
+
+.login-fg a {
+	text-decoration: none;
+}
+
+.login-fg > form.switched-to-bg {
+	opacity: 0;
+	z-index: -1;
+}
+
+.login-fg .email_info {
+	margin-top: -20px;
+	margin-bottom: 20px;
+}
+
+.login-fg .email_info .glyphicon {
+	font-size: 24px;
+	color: #0D47A1;
+}
+
+#register-form .iskantor-class,
+#register-form .addtitles-class,
+#login-form .remember-me {
+	text-align: left;
+}
+
+#register-form .room-class,
+#register-form .titles {
+	height: 0;
+	margin-bottom: 0;
+	overflow: hidden;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+#register-form .room-class.visible,
+#register-form .titles.visible {
+	height: 34px;
+	margin-bottom: 15px;
+}
+
+#register-form .titles.visible.wrong_val {
+	height: 54px;
+}
+
+/* * * ** * * *
+ * Pass reset *
+ * * * ** * * */
+
+#pass-reset-form a .glyphicon {
+	font-size: 13px;
+}
+
+/* * * * * *
+ * Profile *
+ * * * * * */
+
+.profile-fg {
+	position: relative;
+	color: black;
+	padding-bottom: 20px;
+}
+
+.profile-fg .back_button {
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+#profile_edit {
+	max-width: 600px;
+	margin: auto;
+	text-align: center;
+}
+
+#profile_edit h2 {
+	margin-top: 30px;
+}
+
+#profile_edit .form-group .col-sm-8 {
+	text-align: left;
+}
+
+#profile_edit input,
+#profile_edit input + .input-error,
+#modal_new_pass input,
+#modal_new_pass input + .input-error {
+	width: 100%;
+}
+
+#profile_edit input + .input-error,
+#modal_new_pass input + .input-error {
+	text-align: center;
+}
+
+#profile_edit input[disabled] {
+	background: #FFB74D;
+	border: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#profile_edit .acc_change input {
+	width: 100px;
+	text-align: center;
+}
+
+#profile_edit .notif_options_area h3 {
+	text-align: center;
+}
+
+#profile_edit .notif_options_area input {
+	width: auto;
+}
+
+#profile_edit .save_button {
+	margin-top: 20px;
+}
+
+#modal_new_pass .modal-content {
+	text-align: left;
+}
+
+#modal_new_pass .desc {
+	text-align: center;
+	padding: 10px;
+}
+
+#modal_new_pass .error_pass_area {
+	text-align: center;
+	color: red;
+	display: table;
+	width: 100%;
+}
+
+/* * * ** * * *
+ * Konzultace *
+ * * * ** * * */
+
+/* Top row */
+
+#top_menu {
+	padding-top: 15px;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	background-color: #FFA726;
+	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.8);
+	-moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.8);
+	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.8);
+}
+
+#top_menu .profile_frame {
+	text-align: center;
+}
+
+#top_menu label > * {
+	display: block;
+}
+
+#top_menu label input {
+	font-weight: normal;
+}
+
+#daterange_selection input {
+	width: 150px;
+	padding-left: 35px;
+}
+
+#daterange_selection .time_from,
+#daterange_selection .time_to {
+	display: inline-block;
+}
+
+#daterange_selection .time_from > span,
+#daterange_selection .time_to > span {
+	position: absolute;
+	margin-top: 6px;
+	margin-left: 6px;
+}
+
+#scroll_to_top {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+
+#scroll_to_top > div {
+	display: none;
+}
+
+#scroll_to_top button {
+	background: #333;
+	border: none;
+	width: 50px;
+	height: 50px;
+	padding: 0;
+	-webkit-transition: all 0.5s; /* Safari */
+	transition: all 0.5s;
+}
+
+#scroll_to_top button:hover {
+	background: #FFA726;
+}
+
+#scroll_to_top button .glyphicon {
+	left: -1px;
+	top: 0;
+	font-size: 20px;
+	line-height: 50px;
+	color: white;
+}
+
+/* Konzultace - body */
+
+#main_container > .nav-tabs {
+	text-align: center;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	margin-left: -50vw;
+	top: -15px;
+	background: #EEEEEE;
+}
+
+#main_container > .nav-tabs li {
+	width: 50%;
+}
+
+#main_container > .nav-tabs li a {
+	font-weight: bold;
+	color: #F57C00;
+	margin: 0;
+	border: none;
+	border-radius: 0;
+}
+
+#main_container > .nav-tabs li:not(.active) a {
+	-webkit-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.3);
+	box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.3);
+}
+
+#main_container > .nav-tabs li:not(.active) a:hover {
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.konzultace {
+	padding-bottom: 40px;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.konzultace input[type=text],
+.konzultace textarea {
+	border: none;
+	outline: none;
+	padding: 0 2px;
+	margin-left: -2px;
+	margin-right: -2px;
+}
+
+.konzultace > div:last-of-type {
+	background-color: #E0E0E0;
+}
+
+.konzultace > div {
+	padding: 0;
+}
+
+.konzultace .kantor_name {
+	font-size: 22px;
+	padding: 5px;
+}
+
+.konzultace .datum {
+	border-top: 5px solid #FFA726;
+	text-align: center;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.konzultace .datum .den {
+	padding-right: 10px;
+}
+
+.konzultace .underdatum {
+	text-align: center;
+}
+
+.konzultace .kon-row-add {
+	height: 0px;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.konzultace.editing {
+	padding-bottom: 60px;
+}
+
+.konzultace.editing .kon-row-add {
+	height: 32px;
+}
+
+.konzultace .kon-edit-finish {
+	height: 0px;
+	width: 150px;
+	overflow: hidden;
+	position: absolute;
+	z-index: 5;
+	right: 0;
+	left: 0;
+	margin: auto;
+	margin-top: 0px;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.konzultace .kon-edit-finish button {
+	width: 100%;
+}
+
+.konzultace.editing .kon-edit-finish {
+	height: 32px;
+	margin-top: 5px;
+}
+
+.konzultace .kon_stud_filter {
+	height: 0;
+	overflow: hidden;
+	text-align: center;
+	background: white;
+}
+
+.konzultace .kon_stud_filter .desc {
+	padding-top: 10px;
+}
+
+.konzultace .kon_stud_filter input {
+	border: 2px solid #F57C00;
+}
+
+.konzultace.editing .kon_stud_filter {
+	height: auto;
+}
+
+.kon-menu {
+	position: absolute;
+	right: 6px;
+	top: 6px;
+}
+
+.kon-menu button {
+	padding: 2px 6px;
+}
+
+.kon-menu button .glyphicon {
+	top: 3px;
+}
+
+.konzultace.is_author .kon-menu .btn_disable,
+.konzultace.is_author .kon-menu .btn_enable,
+.konzultace.is_author .kon-menu .btn_message {
+	display: none;
+}
+
+.konzultace.is_past .datum {
+	border-color: #BCAAA4;
+}
+
+.konzultace.is_past .kon-popis {
+	background-color: #BCAAA4;
+}
+
+.kon-popis {
+	padding: 30px 20px 10px 20px;
+	background-color: #FFA726;
+	overflow: hidden;
+}
+
+.kon-popis > div {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.kon-popis .kon_room {
+	margin-top: -18px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.kon-popis .kon_room input {
+	height: 20px;
+}
+
+.kon-popis .kon_descr {
+	max-height: 100px;
+	overflow: auto;
+}
+
+.kon-popis .kon_descr textarea {
+	width: 100%;
+	resize: none;
+	max-height: 90px;
+}
+
+.konzultace:not(.is_author) .kon-row .sel-checkbox {
+	display: none;
+}
+
+.konzultace:not(.is_author) .kon-row.disabled,
+.konzultace:not(.is_author) .kon-row.user_present {
+	cursor: default;
+}
+
+.konzultace:not(.is_author) .kon-row:not(.user_present) .jmeno {
+	opacity: 0.2;
+	font-weight: bold;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.konzultace:not(.is_author) .kon-row:not(.user_present):hover .jmeno {
+	opacity: 1;
+	color: #3F51B5;
+}
+
+.kon-row {
+	padding: 5px;
+	height: 34px;
+	overflow: hidden;
+	position: relative;
+	-webkit-transition: all 0.7s;
+	transition: all 0.7s;
+	background-color: #EEEEEE;
+	border-top: 2px solid white;
+	display: table;
+	width: 100%;
+}
+
+.kon-row:not(.is_past),
+.konzultace.is_author .kon-row:not(.is_past),
+.konzultace.is_author .kon-row.is_past.user_present {
+	cursor: pointer;
+}
+
+.kon-row.selected {
+	background-color: #b3c6ff;
+}
+
+.kon-row.disabled .dis_row_label {
+	position: absolute;
+	color: red;
+	right: 0;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 7px;
+	margin-top: -5px;
+}
+
+.kon-row.disabled .cas {
+	color: #999;
+}
+
+.kon-row > div {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.kon-row .sel-checkbox {
+	width: 13px;
+}
+
+.kon-row .sel-checkbox label {
+	margin: 0;
+	margin-top: -3px;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #999;
+	background: white;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.kon-row:hover .sel-checkbox label {
+	border-color: #F57C00;
+	-webkit-box-shadow: 0 0 8px rgba(245, 124, 0,.6);
+	box-shadow: 0 0 8px rgba(245, 124, 0,.6);
+}
+
+.kon-row.selected .sel-checkbox label:after {
+	content: '\e013';
+	font-family: 'Glyphicons Halflings';
+	position: absolute;
+	z-index: 6;
+	margin-top: -6px;
+	margin-left: 1px;
+	font-weight: lighter;
+	color: #2962FF;
+}
+
+.kon-row .sel-checkbox input[type=checkbox] {
+	display: none;
+}
+
+.konzultace.is_author .kon-row.is_past:not(.user_present) .sel-checkbox {
+	visibility: hidden;
+}
+
+.kon-row .cas {
+	width: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.kon-row .jmeno {
+	width: 200px;
+	text-align: center;
+}
+
+.kon-row.logged .jmeno {
+	color: #3F51B5;
+	font-weight: bold;
+}
+
+.kon-row .sign_out {
+	width: 1px;
+}
+
+.kon-row.logged .sign_out span {
+	color: #D50000;
+	font-size: 20px;
+	position: absolute;
+	top: 5px;
+	margin-left: -5px;
+	padding: 0 5px;
+	opacity: 0.4;
+	cursor: pointer;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.kon-row.logged .sign_out span:hover {
+	opacity: 1;
+}
+
+.kon-row.logged .edit_pozn {
+	cursor: pointer;
+	margin-left: -23px;
+	color: #3F51B5;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	opacity: 0.3;
+	padding-left: 26px;
+	width: 20px;
+}
+
+.kon-row.logged .pozn input {
+	height: 20px;
+	width: 100%;
+}
+
+.kon-row.logged .edit_pozn span {
+	position: absolute;
+	top: 5px;
+	margin-left: -30px;
+	font-size: 20px;
+	padding: 0 5px;
+}
+
+.kon-row.logged .edit_pozn.open_edit {
+	opacity: 0.7;
+}
+
+.kon-row.logged .edit_pozn.open_edit span:before {
+	content: '\e013';
+	color: #4CAF50;
+}
+
+.kon-row.logged .edit_pozn:hover {
+	opacity: 1;
+}
+
+.kon-row-add {
+	height: 0;
+	overflow: hidden;
+}
+
+.kon-row-add button {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.kon_stud_filter .desc {
+	padding-top: 20px;
+}
+
+.kon_stud_filter input {
+	text-align: left;
+}
+
+.kon_stud_filter .tagarea {
+	padding: 8px 0;
+}
+
+.kon_stud_filter .tagarea > div {
+	background: #FFA726;
+	padding: 4px 5px 4px 8px;
+	margin: 0 3px;
+	display: inline-block;
+}
+
+.kon_stud_filter .tagarea > div span {
+	font-weight: bold;
+	font-size: 18px;
+	background: #F57C00;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+/* * * * * * * *
+ * NEW consult *
+ * * * * * * * */
+
+#create_new {
+	text-align: center;
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+
+#create_new button {
+	padding: 11px 26px 9px;
+}
+
+#create_new button .glyphicon {
+	left: -4px;
+	top: 2px;
+}
+
+#new_kon_form .row.sections > div > div,
+#new_kon_form .kon_end > div,
+#new_kon_form .kon_note {
+	padding-top: 10px;
+}
+
+#new_kon_form #consult_room {
+	width: 114px;
+}
+
+#new_kon_form input[type=text] {
+	text-align: center;
+}
+
+#new_kon_form #time_sel_field,
+#new_kon_form #section_dur_field,
+#new_kon_form #section_num_field {
+	width: 60px;
+}
+
+#new_kon_form #new_kon_datepicker {
+	width: 114px;
+}
+
+#new_kon_form #kon_note_field {
+	width: 100%;
+	resize: none;
+}
+
+#new_kon_form .kon_notif_choice .desc {
+	margin-top: 10px;
+	margin-bottom: -5px;
+}
+
+#new_kon_form .error_area {
+	color: #D50000;
+}
+
+#new_kon_form .desc {
+	font-weight: bold;
+}
+
+#new_kon_form .kon_create_button {
+	margin-top: 10px;
+}
+
+.modal-content {
+	text-align: center;
+	border-radius: 0;
+}
+
+/* * * * * *
+ * Screens *
+ * * * * * */
+
+@-moz-document url-prefix() {
+	.kon-row.logged .sign_out span,
+	.kon-row.logged .edit_pozn span {
+		top: 8px;
+	}
+}
+
+@media (min-width: 768px) {
+	.modal {
+		text-align: center;
+	}
+
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: ' ';
+		height: 50%;
+	}
+
+	#new_kon_modal.modal:before {
+		height: 100%;
+	}
+
+	.modal .modal-dialog {
+		display: inline-block;
+	}
+}
+
+@media (max-width: 767px) {
+	#main_container {
+		padding-bottom: 50px;
+	}
+
+	#top_menu {
+		text-align: center;
+	}
+
+	#top_menu > div {
+		padding-top: 10px;
+		padding-bottom: 10px
+	}
+
+	#kantor_selection a {
+		display: block;
+		width: fit-content;
+		margin: auto;
+	}
+
+	.login-fg > form {
+		margin-top: 50px;
+	}
+
+	#register-form .room-class.room-class-visible {
+		height: 62px;
+	}
+
+	#register-form .iskantor-class {
+		text-align: center;
+	}
+
+	#profile_edit .form-group .col-sm-8 {
+		text-align: center;
+	}
+}

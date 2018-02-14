@@ -47,7 +47,7 @@ Several constants have to be redefined in `local_settings.php`.
 
 Database tables will be created automatically if they don't already exist (which means if you decide for whatever reason to delete a table, it will be created anew when someone visits application page).
 
-Next, you will need to set up a cron job (*or use other available method to execute a PHP script periodically*). If you wonder how to work with cron, you can start by looking at [this short tutorial](https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/). The job we will need to execute periodically (*every 5 or 10 minutes - select what suits you better*) is PHP script `cronscript.php`. You may need to specify that you want to run PHP command and you want it to execute file `cronscript.php`.
+Next, you will need to set up a cron job (*or use other available method to execute a PHP script periodically*). If you wonder how to work with cron, you can start by looking at [this short tutorial](https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/). The job we will need to execute periodically (*every 10, 20 or 30 minutes - select what suits you best*) is PHP script `cronscript.php`. You may need to specify that you want to run PHP command and you want it to execute file `cronscript.php`.
 The mentioned script checks if notifications need to be sent and sends them if yes.
 
 From now on, your application should be functional and ready to work!
