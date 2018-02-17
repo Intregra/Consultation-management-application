@@ -19,6 +19,9 @@
 
 $help_dis_var = date(TIME_DB_FULL, timezone_adjustment($si * $section_time + $start_time));
 
+if (!isset($current_user))
+	$current_user = get_logged_user();
+
 if ($section_edit_num > 0 && $section_edit_num <= $si + 1)
 	$section_is_editable = true;
 else
@@ -39,7 +42,7 @@ if ($one_user == null || $one_user['section'] != $help_dis_var) {
 		<div class="kon-row<?php echo $help_dis_var; if (!$section_is_editable) echo ' is_past'; ?>">
 			<div class="sel-checkbox"><label></label><input type="checkbox"></div>
 			<div class="cas"><?php echo date(TIME_S, timezone_adjustment($start_time + $section_time * $si)); ?></div>
-			<div class="jmeno"><?php if (!$is_current_author && empty($help_dis_var) && $section_is_editable) echo '<span class="glyphicon glyphicon-copy"></span> ' . $GLOBALS['lang']->consultation->signIn ?></div>
+			<div class="jmeno"><?php if ($current_user && !$is_current_author && empty($help_dis_var) && $section_is_editable) echo '<span class="glyphicon glyphicon-copy"></span> ' . $GLOBALS['lang']->consultation->signIn ?></div>
 			<div class="pozn"></div>
 			<?php if (!empty($help_dis_var)) echo '<div class="dis_row_label">' . $GLOBALS['lang']->consultation->disabled . '</div>'; ?>
 		</div>
@@ -47,9 +50,6 @@ if ($one_user == null || $one_user['section'] != $help_dis_var) {
 } else {
 	// section is equal, someone is logged
 	$logged = true;
-
-	if (!isset($current_user))
-		$current_user = get_logged_user();
 
 	if ($current_user['login'] == $one_user['login'])
 		$is_this_user = ' logged';

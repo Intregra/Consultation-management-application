@@ -278,7 +278,7 @@
 	// gives consultation signin buttons functionality
 	function kon_signin_buttons (just_one=null) {
 		if (just_one == null)
-			just_one = $('.konzultace:not(.is_author) .kon-row:not(.disabled):not(.user_present):not(.is_past)');
+			just_one = $('#main_container:not(.unlogged) .konzultace:not(.is_author) .kon-row:not(.disabled):not(.user_present):not(.is_past)');
 		just_one.click(function () {
 			var this_row = $(this);
 			$.post('ajax.php', {
@@ -1018,6 +1018,11 @@
 	/* * * * * * * * * * * */
 	/* * Login/Reg forms * */
 	/* * * * * * * * * * * */
+
+	// back button
+	$('.rfr_by_js').click(function () {
+		window.location.href = window.location.href;
+	});
 
 	// set focus on login field
 	$('#login-form input[name=email]').focus();

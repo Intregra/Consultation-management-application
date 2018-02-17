@@ -133,14 +133,12 @@ textarea:focus {
 label.checkbox-label {
 	cursor: pointer;
 	font-weight: normal;
-	padding-left: 5px;
+	padding-left: 20px;
 	text-align: left;
 }
 
 .checkbox-label input[type=checkbox] {
-	width: 15px;
-	height: 15px;
-	visibility: hidden;
+	display: none;
 }
 
 /*input[type=checkbox]:before {
@@ -175,7 +173,7 @@ input[type=checkbox]:checked:after {
 	width: 15px;
 	height: 15px;
 	border: 1px solid #999;
-	margin-top: 6px;
+	margin-top: 3px;
 	margin-left: -20px;
 	background: white;
 	cursor: pointer;
@@ -373,6 +371,7 @@ input[type=checkbox]:checked + .checkbox-replacement:after {
 	background: #0D47A1;
 	padding: 20px 130px 10px 10px;
 	color: white;
+	text-align: center;
 }
 
 .feedback_note a {
@@ -574,6 +573,12 @@ input.wrong_val + .input-error {
 	width: 100%;
 }
 
+.login-fg .rfr_by_js {
+	position: absolute;
+	left: 30px;
+	top: 20px;
+}
+
 .login-fg > form {
 	max-width: 500px;
 	padding: 50px;
@@ -675,10 +680,10 @@ input.wrong_val + .input-error {
 	text-align: left;
 }
 
-#profile_edit input,
-#profile_edit input + .input-error,
-#modal_new_pass input,
-#modal_new_pass input + .input-error {
+#profile_edit input[type=text],
+#profile_edit input[type=text] + .input-error,
+#modal_new_pass input[type=text],
+#modal_new_pass input[type=text] + .input-error {
 	width: 100%;
 }
 
@@ -697,6 +702,10 @@ input.wrong_val + .input-error {
 #profile_edit .acc_change input {
 	width: 100px;
 	text-align: center;
+}
+
+#profile_edit .public_view .checkbox-replacement {
+	display: table;
 }
 
 #profile_edit .notif_options_area h3 {
@@ -805,6 +814,18 @@ input.wrong_val + .input-error {
 }
 
 /* Konzultace - body */
+
+#plain_unlogged,
+.not_public {
+	text-align: center;
+	margin: auto;
+	max-width: 700px;
+}
+
+#plain_unlogged .desc {
+	padding: 50px 0 20px 0;
+	white-space: pre-wrap;
+}
 
 #main_container > .nav-tabs {
 	text-align: center;
@@ -1031,7 +1052,7 @@ input.wrong_val + .input-error {
 	width: 100%;
 }
 
-.kon-row:not(.is_past),
+#main_container:not(.unlogged) .kon-row:not(.is_past),
 .konzultace.is_author .kon-row:not(.is_past),
 .konzultace.is_author .kon-row.is_past.user_present {
 	cursor: pointer;

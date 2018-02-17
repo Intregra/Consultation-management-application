@@ -14,7 +14,15 @@
 	else
 		$wanted_user = $current_user;
 
-	if ($current_user['login'] == $wanted_user['login'] && $current_user['level'] >= KANTOR_LEVEL) { ?>
+	if (!$wanted_user) { ?>
+			<div id="plain_unlogged">
+				<div class="desc"><?php echo repl_str($GLOBALS['lang']->index->welcome, $GLOBALS['lang']->other->lector); ?></div>
+				<form action="" method="post">
+					<input type="hidden" name="nav_to_log">
+					<button type="submit"><?php echo $lang->login->loginBut . ' / ' . $lang->login->regBut; ?></button>
+				</form>
+			</div>
+<?php } else if ($current_user && $current_user['login'] == $wanted_user['login'] && $current_user['level'] >= KANTOR_LEVEL) { ?>
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#created"><?php echo $GLOBALS['lang']->consultation->created; ?></a></li>
 				<li><a data-toggle="tab" href="#signed"><?php echo $GLOBALS['lang']->consultation->signed; ?></a></li>

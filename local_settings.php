@@ -6,7 +6,7 @@
 
 	define('HOME_URL', 'http://bakalarka');
 	define('APP_EMAIL', 'xbalaj03@stud.fit.vutbr.cz');
-	define('APP_NAME', 'Konzultačka');
+	define('APP_NAME', 'Consultation management application');
 	define('DEFAULT_LANG', 'cze');
 
 	date_default_timezone_set('Europe/Prague');

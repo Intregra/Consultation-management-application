@@ -27,6 +27,7 @@
 		"enterMail": "Insert your e-mail address connected with your account. We will send you an e-mail with further instructions"
 	},
 	"index": {
+		"welcome": "Welcome to {APP_NAME}.{PHP_EOL}{PHP_EOL}How lectors have their consultations planned can be seen by selecting a lector in input labelled <b>{$1}</b> on the top of the page.{PHP_EOL}{PHP_EOL}If you want to sign on consultation, send a message to lector or even create consultations, all you have to do is to register. If you already have an account, you can just log in.",
 		"menu": "MENU",
 		"settings": "Settings",
 		"logout": "Logout",
@@ -72,7 +73,8 @@
 		"signed": "Signed on",
 		"newKon": "New consultation",
 		"signIn": "Sign",
-		"disabled": "Disabled"
+		"disabled": "Disabled",
+		"noPub": "The lector does not allow public view of his consultations. To view consultations of this lector, you have to log in."
 	},
 	"profile": {
 		"general": "General",
@@ -92,7 +94,8 @@
 		"accChangeKant": "Change account to lector",
 		"passCurrent": "Current password",
 		"passNew": "New password",
-		"passNewAgain": "New password again"
+		"passNewAgain": "New password again",
+		"publicView": "Display consultations only to users logged in the application"
 	},
 	"functions": {
 		"notifKonDel": "Consultation gets deleted",

@@ -43,7 +43,7 @@ if (isset($_POST['profile_edit'])) {
 		$notif_arr_stud = implode(',', $_POST['notif_defaults_stud']);
 
 	if (empty($errors)) {
-		kon_db('UPDATE kon_user SET first_name="' . $_POST['firstname'] . '", last_name="' . $_POST['lastname'] . '", titles_before="' . $_POST['titles_before'] . '", titles_after="' . $_POST['titles_after'] . '", notif_defaults_kant="' . $notif_arr_kant . '", notif_defaults_stud="' . $notif_arr_stud . (isset($_POST['room']) ? '", room="' . $_POST['room'] : '') . '" WHERE login="' . $current_user['login'] . '"');
+		kon_db('UPDATE kon_user SET first_name="' . $_POST['firstname'] . '", last_name="' . $_POST['lastname'] . '", titles_before="' . $_POST['titles_before'] . '", titles_after="' . $_POST['titles_after'] . '", notif_defaults_kant="' . $notif_arr_kant . '", notif_defaults_stud="' . $notif_arr_stud . (isset($_POST['room']) ? '", room="' . $_POST['room'] : '') . '", show_to_all=' . (isset($_POST['public_view']) ? '0' : '1') . ' WHERE login="' . $current_user['login'] . '"');
 		$current_user = get_logged_user();
 		array_push($top_messages, $lang->infoMsg->changesMade);
 	}
@@ -133,6 +133,15 @@ if (isset($_POST['profile_edit'])) {
 			</div>
 		</div>
 
+<?php if ($current_user['level'] > 1) { ?>
+		<div class="form-group public_view">
+			<div class="col-sm-offset-4 col-sm-8">
+				<div>
+					<label class="checkbox-label"><input type="checkbox" name="public_view"<?php echo ($current_user['show_to_all'] > 0 ? '>' : ' checked>') . '<div>' . $lang->profile->publicView . '</div>'; ?></label>
+				</div>
+			</div>
+		</div>
+<?php } ?>
 		<h2><?php echo $lang->index->notif; ?></h2>
 		<div class="desc"><?php echo $lang->profile->notifDesc; ?></div>
 		<div>

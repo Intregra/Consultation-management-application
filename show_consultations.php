@@ -11,7 +11,7 @@
 	if (!isset($current_user))
 		$current_user = get_logged_user();
 
-	if ($wanted_user['login'] == $current_user['login'])
+	if ($current_user && $wanted_user['login'] == $current_user['login'])
 		$is_current_author = true;
 	else
 		$is_current_author = false;
@@ -32,29 +32,34 @@
 		$result = kon_db('SELECT * FROM kon_consultation WHERE author_id="' . $wanted_user['login'] . '" AND execution_date>="' . $show_from_date . '" AND execution_date<="' . $show_to_date . '" ORDER BY execution_date, start_time');
 
 	$last_kon_id = null;
-	foreach ($result->fetch_all(MYSQLI_ASSOC) as $kon_field) {
-		if ($last_kon_id == $kon_field['id'])
-			continue;
-		else
-			$last_kon_id = $kon_field['id'];
-		$signed = kon_db('SELECT * FROM kon_signed NATURAL JOIN kon_user WHERE id=' . $kon_field['id'] . ' ORDER BY section');
-		$available = kon_editable_section($kon_field['id']);
+	if ($current_user || $wanted_user['show_to_all'] > 0)
+		foreach ($result->fetch_all(MYSQLI_ASSOC) as $kon_field) {
+			if ($last_kon_id == $kon_field['id'])
+				continue;
+			else
+				$last_kon_id = $kon_field['id'];
+			$signed = kon_db('SELECT * FROM kon_signed NATURAL JOIN kon_user WHERE id=' . $kon_field['id'] . ' ORDER BY section');
+			$available = kon_editable_section($kon_field['id']);
 
-		// check if current user is allowed to kon
-		$stud_filter_arr = [];
-		if (!empty($kon_field['stud_filter']))
-			$stud_filter_arr = explode(',', $kon_field['stud_filter']);
-		$filtered_user = false;
-		if (!$is_current_author && !empty($kon_field['stud_filter']))
-			$filtered_user = !in_array(explode('@', $current_user['email'])[1], $stud_filter_arr);
+			// check if current user is allowed to kon
+			$stud_filter_arr = [];
+			if (!empty($kon_field['stud_filter']))
+				$stud_filter_arr = explode(',', $kon_field['stud_filter']);
+			$filtered_user = false;
+			if (!$is_current_author && !empty($kon_field['stud_filter'])) {
+				if ($current_user)
+					$filtered_user = !in_array(explode('@', $current_user['email'])[1], $stud_filter_arr);
+				else
+					$filtered_user = true;
+			}
 
-		// check if kon is already finished
-		$now = time();
-		$compare_time = to_timestamp($kon_field['start_time'], $kon_field['execution_date']) + ($kon_field['section_amount'] * to_timestamp($kon_field['section_duration']));
-		if ($now >= $compare_time)
-			$kon_is_past = ' is_past';
-		else
-			$kon_is_past = '';
+			// check if kon is already finished
+			$now = time();
+			$compare_time = to_timestamp($kon_field['start_time'], $kon_field['execution_date']) + ($kon_field['section_amount'] * to_timestamp($kon_field['section_duration']));
+			if ($now >= $compare_time)
+				$kon_is_past = ' is_past';
+			else
+				$kon_is_past = '';
 ?>
 			
 			<div class="row konzultace<?php if ($is_current_author) echo ' is_author'; echo $kon_is_past; ?>" id="kon_id_<?php echo $kon_field['id']; ?>" data-konid="<?php echo $kon_field['id']; ?>">
@@ -94,30 +99,22 @@
 				</div>
 				<div class="col-sm-9">
 					<div class="kon-menu">
-<?php if ($is_current_author) {
-		if ($available > 0) { ?>
+<?php if ($is_current_author && $available > 0) { ?>
 						<button class="btn_disable" title="<?php echo $GLOBALS['lang']->consultation->titleDisable; ?>"><span class="glyphicon glyphicon-remove"></span></button>
 						<button class="btn_enable" title="<?php echo $GLOBALS['lang']->consultation->titleEnable; ?>"><span class="glyphicon glyphicon-ok"></span></button>
-<?php 	} ?>
+<?php } if ($current_user) { ?>
 						<button class="btn_message" title="<?php echo $GLOBALS['lang']->consultation->titleMessage; ?>"><span class="glyphicon glyphicon-envelope"></span></button>
-<?php 	if ($available > 0) { ?>
+<?php } if ($current_user && $available > 0) { ?>
 						<button class="btn_notifications" title="<?php echo $GLOBALS['lang']->consultation->titleNotif; ?>"><span class="glyphicon glyphicon-bell"></span></button>
+<?php } if ($is_current_author && $available > 0) { ?>
 						<button class="btn_edit" title="<?php echo $GLOBALS['lang']->consultation->titleEdit; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
-<?php 	} ?>
+<?php } if ($is_current_author) { ?>
 						<button class="btn_duplicate" title="<?php echo $GLOBALS['lang']->consultation->titleDupli; ?>"><span class="glyphicon glyphicon-duplicate"></span></button>
+<?php } if (!$filtered_user) { ?>
 						<button class="btn_history" title="<?php echo $GLOBALS['lang']->consultation->titleHistory; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-<?php 	if ($available == 1) { ?>
+<?php } if ($is_current_author && $available == 0) { ?>
 						<button class="btn_delete" title="<?php echo $GLOBALS['lang']->consultation->titleDel; ?>"><span class="glyphicon glyphicon-trash"></span></button>
-<?php 	}
-	} else if ($filtered_user) { ?>
-						<button class="btn_message" title="<?php echo $GLOBALS['lang']->consultation->titleMessage; ?>"><span class="glyphicon glyphicon-envelope"></span></button>
-<?php } else { ?>
-						<button class="btn_message" title="<?php echo $GLOBALS['lang']->consultation->titleMessage; ?>"><span class="glyphicon glyphicon-envelope"></span></button>
-						<button class="btn_history" title="<?php echo $GLOBALS['lang']->consultation->titleHistory; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-<?php 	if ($available > 0) { ?>
-						<button class="btn_notifications" title="<?php echo $GLOBALS['lang']->consultation->titleNotif; ?>"><span class="glyphicon glyphicon-bell"></span></button>
-<?php 	}
-	} ?>
+<?php } ?>
 					</div>
 <?php if ($filtered_user) { ?>
 					<div class="kon-popis"><div><?php echo repl_str($GLOBALS['lang']->consultation->restricted, implode(', ', $stud_filter_arr)); ?></div></div>
@@ -165,4 +162,7 @@
 				</div>
 			</div>
 
-<?php } // foreach ?>
+<?php } // foreach 
+	else { ?>
+			<div class="not_public"><?php echo $GLOBALS['lang']->consultation->noPub; ?></div>
+<?php } ?>

@@ -27,6 +27,8 @@ function kon_create_new () {
 	$errs = [];
 	$cook = [];
 	$current_user = get_logged_user();
+	if (!$current_user || $current_user['level'] < KANTOR_LEVEL)
+		return;
 	touch_user_action($current_user['login']);
 
 	// check date
@@ -84,9 +86,6 @@ function kon_create_new () {
 	}
 
 	if (empty($errs)) {
-		if ($current_user['level'] < KANTOR_LEVEL)
-			return;
-
 		// check db for collisions
 		$kon_from = to_timestamp($t->format(TIME_DB_FULL), $d->format(DATE_DB));
 		$kon_to = $kon_from + (to_timestamp($_POST['sec_dur']) * $_POST['sec_num']);
@@ -519,6 +518,8 @@ function sign_to_kon () {
 		return;
 
 	$current_user = get_logged_user();
+	if (!$current_user)
+		return;
 	touch_user_action($current_user['login']);
 
 	// do nothing if user is filtered (currently possible only by forging ajax requests)

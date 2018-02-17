@@ -9,6 +9,8 @@ require('header.php');
 <?php echo print_info_messages(); ?>
 	<div class="main_error_container"></div>
 
+	<button class="rfr_by_js"><?php echo $lang->other->back; ?></button>
+
 	<form action="" method="post" id="login-form" class="form-horizontal<?php if (isset($_POST['logreg']) && $_POST['logreg'] != 'log') echo ' switched-to-bg'; ?>">
 		
 		<div class="form-group">
@@ -141,14 +143,6 @@ require('header.php');
 		</div>
 
 	</form>
-
-<?php if (!isset($_COOKIE['feedback_info'])) { ?>
-		<div class="feedback_note">
-			<button class="feed_close">x</button>
-			Děkuji za používání mé aplikace. Moc mi to pomůže, při jejím dalším vývoji. Mějte prosím na paměti, že aplikace je stále ve vývoji.<br>
-			Pokud budete mít jakékoliv připomínky či dotazy, využíjte tlačítko <b>Feedback</b> v pravém dolním rohu obrazovky anebo mi napište e-mail na <a href="mailto:xbalaj03@stud.fit.vutbr.cz">xbalaj03@stud.fit.vutbr.cz</a>. Děkuji.
-		</div>
-<?php } ?>
 
 </div>
 

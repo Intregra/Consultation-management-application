@@ -80,8 +80,18 @@ function kon_db ($sql, $close = 0) {
 
 	if ($stmnt === false)
 		trigger_error('Error with query: "' . $sql . '" >> ' . $conn->error, E_USER_ERROR);
-	if ($stmnt->execute() === false)
-		trigger_error('Error with query: "' . $sql . '" >> ' . $stmnt->error, E_USER_ERROR);
+	try {
+		if ($stmnt->execute() === false)
+			trigger_error('Error with query: "' . $sql . '" >> ' . $stmnt->error, E_USER_ERROR);
+	} catch (Exception $e) {
+		// in case of "Statement needs to be re-prepared" error
+		$stmnt = $conn->prepare($sql);
+		if ($stmnt === false)
+			trigger_error('Error with query: "' . $sql . '" >> ' . $conn->error, E_USER_ERROR);
+		if ($stmnt->execute() === false)
+			trigger_error('Error with query: "' . $sql . '" >> ' . $stmnt->error, E_USER_ERROR);
+	}
+
 	$result = $stmnt->get_result();
 	if ($stmnt->error != '') {
 		trigger_error('Error with query: "' . $sql . '" >> ' . $stmnt->error, E_USER_ERROR);
@@ -161,7 +171,8 @@ function create_tables_if_not_exist () {
 			actions_check_time datetime DEFAULT CURRENT_TIMESTAMP,
 			queued_actions text,
 			notif_defaults_kant text,
-			notif_defaults_stud text
+			notif_defaults_stud text,
+			show_to_all int(2) DEFAULT 1
 		) COLLATE=utf8mb4_unicode_520_ci';
 		kon_db($sql);
 	}

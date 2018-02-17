@@ -27,6 +27,7 @@
 		"enterMail": "Zadejte e-mailovou adresu spojenou s vaším účtem, na kterou bude zaslán e-mail s dalšími instrukcemi"
 	},
 	"index": {
+		"welcome": "Vítejte v aplikaci {APP_NAME}.{PHP_EOL}{PHP_EOL}Jak mají kantoři naplánované konzultační schůzky si můžete prohlédnout zvolením kantora v kolonce <b>{$1}</b> v horní části stránky.{PHP_EOL}{PHP_EOL}Pokud se chcete na konzultaci zapsat, zaslat kantorovi zprávu a nebo dokonce konzultace sám vytvářet, stačí se registrovat. Máte-li již vytvořený účet, můžete se rovnou přihlásit.",
 		"menu": "MENU",
 		"settings": "Nastavení",
 		"logout": "Odhlásit",
@@ -72,7 +73,8 @@
 		"signed": "Příhlášené",
 		"newKon": "Nová konzultace",
 		"signIn": "Přihlásit",
-		"disabled": "Nepřístupno"
+		"disabled": "Nepřístupno",
+		"noPub": "Kantor nemá povoleno veřejné zobrazování svých konzultací. Pro zobrazení se musíte přihlásit."
 	},
 	"profile": {
 		"general": "Obecné",
@@ -92,7 +94,8 @@
 		"accChangeKant": "Změnit účet na kantorský",
 		"passCurrent": "Aktuální heslo",
 		"passNew": "Nové heslo",
-		"passNewAgain": "Nové heslo znovu"
+		"passNewAgain": "Nové heslo znovu",
+		"publicView": "Zobrazovat své konzultace pouze uživatelům přihlášeným do aplikace"
 	},
 	"functions": {
 		"notifKonDel": "Konzultace bude smazána",

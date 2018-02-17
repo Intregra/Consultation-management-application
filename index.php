@@ -7,15 +7,18 @@ $current_user = get_logged_user();
 
 check_POST();
 
+if (isset($_POST['nav_to_log']) || isset($_POST['logreg'])) {
+	require 'login.php';
+	exit;
+}
+
 if ($current_user) {
 	prolong_login_cookie();
 	touch_user_action($current_user['login']);
-	$title = APP_NAME;
-	require('header.php');
-} else {
-	require('login.php');
-	exit;
 }
+$title = APP_NAME;
+require('header.php');
+
 
 if (isset($_GET['kantor']))
 	$wanted_user = kon_db('SELECT * FROM kon_user WHERE login="' . urldecode($_GET['kantor']) . '"')->fetch_assoc();
@@ -48,15 +51,19 @@ new kon create end padding
 
 password change in profile settings - error messages uncircusify
 
-cron can be longer
+HTTPS - musí provozovatel appky vyřešit individuálně
 
-HTTPS
+možnost skrýt kantorovi prvky pro přihlášení a vyhledávání cizích konzultací - nastavení profilu
+
+přejmenovat aplikaci aby měla fajn anglický název
 -->
-	
+
+<?php echo print_info_messages(); ?>
 	<div id="main_content" class="container-fluid">
 
 		<div class="row" id="top_menu">
 			<div class="profile_frame col-sm-2">
+<?php if ($current_user) { ?>				
 				<div><b><?php echo $current_user['first_name'] . ' ' . $current_user['last_name']; ?></b></div>
 				<div class="dropdown">
 					<button type="button" class="dropbtn"><?php echo $lang->index->menu; ?></button>
@@ -65,14 +72,25 @@ HTTPS
 						<a href="?logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;<?php echo $lang->index->logout; ?></a>
 					</div>
 				</div>
+<?php } else { ?>
+				<form action="" method="post">
+					<input type="hidden" name="nav_to_log">
+					<label>
+						<span>&nbsp;</span>
+						<button type="submit"><?php echo $lang->login->loginBut; ?></button>
+					</label>
+				</form>
+<?php } ?>				
 			</div>
 
 			<div id="kantor_selection" class="col-sm-6">
-				<label class="kan_sel_input"><span><?php echo $lang->other->lector; ?></span><input type="text" value="<?php echo ($wanted_user['titles_before'] ? $wanted_user['titles_before'] . ' ' : '') . $wanted_user['last_name'] . ' ' . $wanted_user['first_name'] . ($wanted_user['titles_after'] ? ', ' . $wanted_user['titles_after'] : '') . ' <' . $wanted_user['email'] . '>'; ?>"></label>
+				<label class="kan_sel_input"><span><?php echo $lang->other->lector; ?></span><input type="text" value="<?php if ($wanted_user) echo ($wanted_user['titles_before'] ? $wanted_user['titles_before'] . ' ' : '') . $wanted_user['last_name'] . ' ' . $wanted_user['first_name'] . ($wanted_user['titles_after'] ? ', ' . $wanted_user['titles_after'] : '') . ' <' . $wanted_user['email'] . '>'; ?>"></label>
 				<label class="kan_sel_filter"><span><?php echo $lang->index->filter; ?></span><input type="text" value="<?php if (isset($_GET['kfilter'])) echo urldecode($_GET['kfilter']); ?>"></label>
+<?php if ($current_user) { ?>				
 				<a class="look-like-button" href="<?php echo HOME_URL;?>"><?php echo $lang->index->myConsults; ?></a>
+<?php } ?>				
 			</div>
-
+<?php if ($wanted_user) { ?>
 			<div id="daterange_selection" class="col-sm-4">
 				<label title="<?php echo $lang->index->inFormat; ?>">
 					<span><?php echo $lang->index->filterByTime; ?></span>
@@ -86,11 +104,11 @@ HTTPS
 					</div>
 				</label>
 			</div>
+<?php } ?>
 		</div>
-
 		<div class="main_error_container"></div>
 
-		<div class="container" id="main_container">
+		<div class="container<?php if (!$current_user) echo ' unlogged'; ?>" id="main_container">
 <?php require 'pre_show_consultations.php'; ?>
 		</div>
 
@@ -101,7 +119,7 @@ HTTPS
 		</div>
 
 
-<?php if ($current_user['login'] == $wanted_user['login'] && $current_user['level'] >= KANTOR_LEVEL) { ?>
+<?php if ($current_user && $current_user['login'] == $wanted_user['login'] && $current_user['level'] >= KANTOR_LEVEL) { ?>
 		<div id="new_kon_modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -182,5 +200,13 @@ HTTPS
 		</div>
 
 	</div>
+
+<?php if (!isset($_COOKIE['feedback_info'])) { ?>
+		<div class="feedback_note">
+			<button class="feed_close">x</button>
+			Děkuji za používání mé aplikace. Moc mi to pomůže, při jejím dalším vývoji. Mějte prosím na paměti, že aplikace je stále ve vývoji.<br>
+			Pokud budete mít jakékoliv připomínky či dotazy, využíjte tlačítko <b>Feedback</b> v pravém dolním rohu obrazovky anebo mi napište e-mail na <a href="mailto:xbalaj03@stud.fit.vutbr.cz">xbalaj03@stud.fit.vutbr.cz</a>. Děkuji.
+		</div>
+<?php } ?>
 
 <?php require('footer.php'); ?>
