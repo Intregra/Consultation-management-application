@@ -95,7 +95,8 @@
 		"passCurrent": "Aktuální heslo",
 		"passNew": "Nové heslo",
 		"passNewAgain": "Nové heslo znovu",
-		"publicView": "Zobrazovat své konzultace pouze uživatelům přihlášeným do aplikace"
+		"publicView": "Zobrazovat své konzultace pouze uživatelům přihlášeným do aplikace",
+		"studShow": "Pouze kantorské rozhraní (skryje vyhledávání kantorů a přihlašování na cizí konzultace)"
 	},
 	"functions": {
 		"notifKonDel": "Konzultace bude smazána",

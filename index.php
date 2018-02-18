@@ -82,7 +82,7 @@ přejmenovat aplikaci aby měla fajn anglický název
 				</form>
 <?php } ?>				
 			</div>
-
+<?php if (!$current_user || $current_user['login'] != $wanted_user['login'] || $current_user['level'] < KANTOR_LEVEL || $current_user['stud_show'] > 0) { ?>
 			<div id="kantor_selection" class="col-sm-6">
 				<label class="kan_sel_input"><span><?php echo $lang->other->lector; ?></span><input type="text" value="<?php if ($wanted_user) echo ($wanted_user['titles_before'] ? $wanted_user['titles_before'] . ' ' : '') . $wanted_user['last_name'] . ' ' . $wanted_user['first_name'] . ($wanted_user['titles_after'] ? ', ' . $wanted_user['titles_after'] : '') . ' <' . $wanted_user['email'] . '>'; ?>"></label>
 				<label class="kan_sel_filter"><span><?php echo $lang->index->filter; ?></span><input type="text" value="<?php if (isset($_GET['kfilter'])) echo urldecode($_GET['kfilter']); ?>"></label>
@@ -90,7 +90,8 @@ přejmenovat aplikaci aby měla fajn anglický název
 				<a class="look-like-button" href="<?php echo HOME_URL;?>"><?php echo $lang->index->myConsults; ?></a>
 <?php } ?>				
 			</div>
-<?php if ($wanted_user) { ?>
+<?php }
+	if ($wanted_user) { ?>
 			<div id="daterange_selection" class="col-sm-4">
 				<label title="<?php echo $lang->index->inFormat; ?>">
 					<span><?php echo $lang->index->filterByTime; ?></span>
@@ -108,7 +109,7 @@ přejmenovat aplikaci aby měla fajn anglický název
 		</div>
 		<div class="main_error_container"></div>
 
-		<div class="container<?php if (!$current_user) echo ' unlogged'; ?>" id="main_container">
+		<div class="container<?php if (!$current_user) echo ' unlogged'; else if ($current_user['level'] >= KANTOR_LEVEL && $current_user['stud_show'] < 1) echo ' stud_not_show'; ?>" id="main_container">
 <?php require 'pre_show_consultations.php'; ?>
 		</div>
 

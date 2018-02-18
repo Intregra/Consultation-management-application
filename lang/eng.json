@@ -95,7 +95,8 @@
 		"passCurrent": "Current password",
 		"passNew": "New password",
 		"passNewAgain": "New password again",
-		"publicView": "Display consultations only to users logged in the application"
+		"publicView": "Display consultations only to users logged in the application",
+		"studShow": "Display only lector interface (hides lector search bar and signing to other consultations)"
 	},
 	"functions": {
 		"notifKonDel": "Consultation gets deleted",

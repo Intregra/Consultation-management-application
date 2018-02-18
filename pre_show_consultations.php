@@ -22,23 +22,27 @@
 					<button type="submit"><?php echo $lang->login->loginBut . ' / ' . $lang->login->regBut; ?></button>
 				</form>
 			</div>
-<?php } else if ($current_user && $current_user['login'] == $wanted_user['login'] && $current_user['level'] >= KANTOR_LEVEL) { ?>
+<?php } else if ($current_user && $current_user['login'] == $wanted_user['login'] && $current_user['level'] >= KANTOR_LEVEL) { 
+			if ($current_user['stud_show'] > 0) { ?>
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#created"><?php echo $GLOBALS['lang']->consultation->created; ?></a></li>
 				<li><a data-toggle="tab" href="#signed"><?php echo $GLOBALS['lang']->consultation->signed; ?></a></li>
 			</ul>
-			<div class="tab-content">
+			<div class="tab-content">			
 				<div id="created" class="tab-pane fade in active">
+<?php 		} ?>					
 					<div id="create_new">
 						<button type="button" class="btn_new_kon" data-toggle="modal" data-target="#new_kon_modal"><span class="glyphicon glyphicon-plus"></span>&nbsp;<?php echo $GLOBALS['lang']->consultation->newKon; ?></button>
 					</div>
-					<?php require 'show_consultations.php'; ?>
+					<?php require 'show_consultations.php'; 
+			if ($current_user['stud_show'] > 0) { ?>
 				</div>
 				<div id="signed" class="tab-pane fade">
 					<?php $kantor_signed = true; require 'show_consultations.php'; ?>
 				</div>
 			</div>
 <?php
+			}
 	} else {
 		require 'show_consultations.php';
 	}

@@ -278,7 +278,7 @@
 	// gives consultation signin buttons functionality
 	function kon_signin_buttons (just_one=null) {
 		if (just_one == null)
-			just_one = $('#main_container:not(.unlogged) .konzultace:not(.is_author) .kon-row:not(.disabled):not(.user_present):not(.is_past)');
+			just_one = $('#main_container:not(.unlogged):not(.stud_not_show) .konzultace:not(.is_author) .kon-row:not(.disabled):not(.user_present):not(.is_past)');
 		just_one.click(function () {
 			var this_row = $(this);
 			$.post('ajax.php', {

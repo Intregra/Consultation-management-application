@@ -1052,7 +1052,7 @@ input.wrong_val + .input-error {
 	width: 100%;
 }
 
-#main_container:not(.unlogged) .kon-row:not(.is_past),
+#main_container:not(.unlogged):not(.stud_not_show) .kon-row:not(.is_past),
 .konzultace.is_author .kon-row:not(.is_past),
 .konzultace.is_author .kon-row.is_past.user_present {
 	cursor: pointer;
