@@ -172,7 +172,8 @@ function create_tables_if_not_exist () {
 			queued_actions text,
 			notif_defaults_kant text,
 			notif_defaults_stud text,
-			show_to_all int(2) DEFAULT 1
+			show_to_all int(2) DEFAULT 1,
+			stud_show int(2) DEFAULT 1
 		) COLLATE=utf8mb4_unicode_520_ci';
 		kon_db($sql);
 	}
