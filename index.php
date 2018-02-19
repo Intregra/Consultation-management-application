@@ -33,29 +33,13 @@ handle_from_param();
 
 	TODO
 
-při duplikaci přidat možnost na duplikaci prihlasenych
-
-do editačního režimu přidat editaci data -> upozornit pokud už je někdo přihlášen
-
 počet pokusů pro heslo
-
-info na HP - představit aplikaci
-
-gravatar
 
 cookies save recent kantors on top of kantor search list
 
 kon_room adjust width
 
-new kon create end padding
-
-password change in profile settings - error messages uncircusify
-
 HTTPS - musí provozovatel appky vyřešit individuálně
-
-možnost skrýt kantorovi prvky pro přihlášení a vyhledávání cizích konzultací - nastavení profilu
-
-přejmenovat aplikaci aby měla fajn anglický název
 -->
 
 <?php echo print_info_messages(); ?>

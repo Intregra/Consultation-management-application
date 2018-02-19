@@ -680,10 +680,10 @@ input.wrong_val + .input-error {
 	text-align: left;
 }
 
-#profile_edit input[type=text],
-#profile_edit input[type=text] + .input-error,
-#modal_new_pass input[type=text],
-#modal_new_pass input[type=text] + .input-error {
+#profile_edit input:not([type=checkbox]),
+#profile_edit input:not([type=checkbox]) + .input-error,
+#modal_new_pass input:not([type=checkbox]),
+#modal_new_pass input:not([type=checkbox]) + .input-error {
 	width: 100%;
 }
 
