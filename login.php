@@ -50,7 +50,7 @@ require('header.php');
 	<form action="" method="post" id="register-form" class="form-horizontal<?php if (!isset($_POST['logreg']) || $_POST['logreg'] != 'reg') echo ' switched-to-bg'; ?>">
 		
 		<div class="email_info">
-			<i class="glyphicon glyphicon-info-sign"></i>
+			<i class="glyphicon glyphicon-alert"></i>
 			<div><?php echo $GLOBALS['lang']->login->regInfo; ?></div>
 		</div>
 

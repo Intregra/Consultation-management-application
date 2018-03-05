@@ -152,6 +152,7 @@ if (isset($_POST['profile_edit'])) {
 <?php } ?>
 		<h2><?php echo $lang->index->notif; ?></h2>
 		<div class="desc"><?php echo $lang->profile->notifDesc; ?></div>
+		<h2><?php echo $lang->profile->notifMeWhen; ?></h2>
 		<div>
 			<div class="notif_options_area">
 <?php

@@ -97,7 +97,7 @@
 ?>
 					</div>
 				</div>
-				<div class="col-sm-9">
+				<div class="col-sm-9 kon_right_part">
 					<div class="kon-menu">
 <?php if ($is_current_author && $available > 0) { ?>
 						<button class="btn_disable" title="<?php echo $GLOBALS['lang']->consultation->titleDisable; ?>"><span class="glyphicon glyphicon-remove"></span></button>
@@ -110,15 +110,13 @@
 						<button class="btn_edit" title="<?php echo $GLOBALS['lang']->consultation->titleEdit; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 <?php } if ($is_current_author) { ?>
 						<button class="btn_duplicate" title="<?php echo $GLOBALS['lang']->consultation->titleDupli; ?>"><span class="glyphicon glyphicon-duplicate"></span></button>
-<?php } if (!$filtered_user) { ?>
+<?php } ?>
 						<button class="btn_history" title="<?php echo $GLOBALS['lang']->consultation->titleHistory; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-<?php } if ($is_current_author && $available == 0) { ?>
+<?php if ($is_current_author && $available == 0) { ?>
 						<button class="btn_delete" title="<?php echo $GLOBALS['lang']->consultation->titleDel; ?>"><span class="glyphicon glyphicon-trash"></span></button>
 <?php } ?>
 					</div>
-<?php if ($filtered_user) { ?>
-					<div class="kon-popis"><div><?php echo repl_str($GLOBALS['lang']->consultation->restricted, implode(', ', $stud_filter_arr)); ?></div></div>
-<?php } else { ?>
+
 					<div class="kon-popis">
 						<div class="kon_room"<?php if (empty($kon_field['room'])) echo ' style="height: 0"'; ?>><?php echo '<b>' . $GLOBALS['lang']->index->room . ':</b> <span>' . $kon_field['room'] . '</span>'; ?></div>
 						<div class="kon_descr"><?php echo $kon_field['kantor_note']; ?></div>
@@ -127,8 +125,7 @@
 					<div class="kon-row-add top-add">
 						<button title="<?php echo $GLOBALS['lang']->consultation->add; ?>"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
-<?php
-	}
+<?php }
 		$one_user = $signed->fetch_assoc();
 		$start_time = to_timestamp($kon_field['start_time']);
 		$section_time = to_timestamp($kon_field['section_duration']);
@@ -158,8 +155,11 @@
 					<div class="kon-edit-finish">
 						<button type="button"><?php echo $GLOBALS['lang']->consultation->done; ?></button>
 					</div>
-<?php } } ?>
+<?php } ?>
 				</div>
+<?php if ($filtered_user) { ?>
+				<div class="col-sm-offset-3 col-sm-9 restriction_info"><i class="glyphicon glyphicon-alert"></i><?php echo repl_str($GLOBALS['lang']->consultation->restricted, implode(', ', $stud_filter_arr)); ?></div>
+<?php } ?>
 			</div>
 
 <?php } // foreach 

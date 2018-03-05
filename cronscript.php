@@ -1,5 +1,7 @@
 <?php
 
+chdir(realpath(dirname(__FILE__)));
+
 require_once('functions.php');
 
 // send notifications if there are any to send
