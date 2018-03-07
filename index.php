@@ -188,7 +188,7 @@ HTTPS - musí provozovatel appky vyřešit individuálně
 
 	</div>
 
-<?php if (!isset($_COOKIE['feedback_info'])) { ?>
+<?php if (!isset($_COOKIE['feedback_info']) && FEEDBACK > 0) { ?>
 		<div class="feedback_note">
 			<button class="feed_close">x</button>
 			Děkuji za používání mé aplikace. Moc mi to pomůže, při jejím dalším vývoji. Mějte prosím na paměti, že aplikace je stále ve vývoji.<br>

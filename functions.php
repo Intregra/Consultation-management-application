@@ -19,6 +19,9 @@ define('LAST_MINUTE', 60*60*2);
 define('ACTION_CHECK_DELAY', 60);
 define('REMEMBERME_DURATION', 3600*24*90);
 
+// FEEDBACK > 0 shows feedback message and UI to send feedback
+define('FEEDBACK', 0);
+
 // database credentials and local settings
 require 'local_settings.php';
 

@@ -1,3 +1,4 @@
+<?php if (FEEDBACK > 0) { ?>
 	<!-- feedback area -->
 	<button class="feedback_button" data-toggle="modal" data-target="#modal_feedback">Feedback</button>
 	<div id="modal_feedback" class="modal fade" role="dialog">
@@ -10,6 +11,7 @@
 			</div>
 		</div>
 	</div>
+<?php } ?>
 
 	<!-- Google Font -->
 	<script src="js/jquery-ui.min.js"></script>
