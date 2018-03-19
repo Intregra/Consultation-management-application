@@ -105,7 +105,9 @@
 
 	// make .kon-rows selectable
 	function selectable_kon_rows (just_one=null) {
-		function select_row_onclick () {
+		function select_row_onclick (event) {
+			if ($(event.target).is('input[type=text]'))
+				return;
 			// first deselect rows of all other consultations
 			var parent = get_parent(this, '.konzultace');
 			var parentID = parent.prop('id');
@@ -214,6 +216,14 @@
 				if (data)
 					$('.main_error_container').html(data);
 			});
+			// hide section occupy notes
+			elem.find('.kon-row .pozn input').each(function () {
+				if ($(this).val() != '')
+					get_parent(this, '.kon-row').addClass('occupied');
+				else
+					get_parent(this, '.kon-row').removeClass('occupied');
+				$(this).parent().html($(this).val());
+			});
 		});
 	}
 
@@ -278,7 +288,7 @@
 	// gives consultation signin buttons functionality
 	function kon_signin_buttons (just_one=null) {
 		if (just_one == null)
-			just_one = $('#main_container:not(.unlogged):not(.stud_not_show) .konzultace:not(.is_author) .kon-row:not(.disabled):not(.user_present):not(.is_past)');
+			just_one = $('#main_container:not(.unlogged):not(.stud_not_show) .konzultace:not(.is_author) .kon-row:not(.disabled):not(.user_present):not(.is_past):not(.occupied)');
 		just_one.click(function () {
 			var this_row = $(this);
 			$.post('ajax.php', {
@@ -456,6 +466,7 @@
 					kon_parent.addClass('editing');
 					var note_send_timeout = null;
 					var room_send_timeout = null;
+					var occupy_send_timeout = null;
 					var kon_popis = kon_parent.find('.kon-popis .kon_descr');
 					kon_popis.html('<textarea placeholder="' + lang.script.konNotePlaceholder + '" rows="1">' + kon_popis.html() + '</textarea>');
 					var popis_textarea = kon_popis.find('textarea');
@@ -472,6 +483,31 @@
 						kon_parent.find('.kon_room').height(0).animate({ height: '+=' + krooin.height() }, hide_show_row_anim_dur, null, function () {
 							$(this).css('height', '');
 						});
+					// occupy notes edit
+					kon_parent.find('.kon-row:not(.is_past):not(.user_present):not(.disabled)').each(function () {
+						var konrow = $(this);
+						konrow.find('.pozn').html('<input type="text" placeholder="' + lang.script.occupyPlaceholder + '" value="' + konrow.find('.pozn').html() + '">');
+						var occupyInput = konrow.find('.pozn input');
+						occupyInput.keyup(function () {
+							clearTimeout(occupy_send_timeout);
+							occupy_send_timeout = setTimeout(function () {
+								if (occupyInput.length > 0)
+									var note_to_send = occupyInput.val();
+								else
+									var note_to_send = konrow.find('.pozn').html();
+								$.post('ajax.php', {
+									call: 'kon_occupy_section',
+									target: konID,
+									note: note_to_send,
+									section: konrow.find('.cas').html(),
+									sec_tok: sec_tok
+								}).done(function (data) {
+									if (data != 0)
+										$('.main_error_container').html(data);
+								});
+							}, note_send_delay);
+						});
+					});
 					// when writing note, dont send ajax after each key is pressed, instead wait a while
 					popis_textarea.keyup(function () {
 						clearTimeout(note_send_timeout);
@@ -498,7 +534,6 @@
 								var room_to_send = krooin.val();
 							else
 								var room_to_send = kroom.html();
-							console.log(room_to_send);
 							$.post('ajax.php', {
 								call: 'kon_edit_room',
 								target: konID,

@@ -773,6 +773,8 @@ input.wrong_val + .input-error {
 #kantor_selection .sel_con_part .my_con_btn {
 	display: block;
 	width: fit-content;
+	width: -moz-fit-content;
+	width: -webkit-fit-content;
 }
 
 #kantor_selection .kan_sel_filter {
@@ -910,6 +912,15 @@ input.wrong_val + .input-error {
 	padding: 5px;
 }
 
+.konzultace .kantor_name a {
+	font-weight: bold;
+	color: inherit;
+}
+
+.konzultace .kantor_name a:hover {
+	color: #F57C00;
+}
+
 .konzultace .datum {
 	border-top: 5px solid #FFA726;
 	text-align: center;
@@ -937,6 +948,13 @@ input.wrong_val + .input-error {
 
 .konzultace.editing .kon-row-add {
 	height: 32px;
+}
+
+.konzultace.editing .kon-row .pozn input {
+	width: 100%;
+	height: 22px;
+	background: inherit;
+	box-shadow: none;
 }
 
 .konzultace .kon-edit-finish {
@@ -999,6 +1017,11 @@ input.wrong_val + .input-error {
 .konzultace.is_author .kon-menu .btn_enable,
 .konzultace.is_author .kon-menu .btn_message {
 	display: none;
+}
+
+.konzultace.is_author .kon-row:not(.user_present) .jmeno,
+.konzultace .kon-row.occupied .jmeno {
+	width: 5%;
 }
 
 .konzultace.is_past .datum {
@@ -1085,7 +1108,7 @@ input.wrong_val + .input-error {
 	width: 100%;
 }
 
-#main_container:not(.unlogged):not(.stud_not_show) .kon-row:not(.is_past),
+#main_container:not(.unlogged):not(.stud_not_show) .kon-row:not(.is_past):not(.occupied),
 .konzultace.is_author .kon-row:not(.is_past),
 .konzultace.is_author .kon-row.is_past.user_present {
 	cursor: pointer;
@@ -1390,6 +1413,8 @@ input.wrong_val + .input-error {
 	#kantor_selection a {
 		display: block;
 		width: fit-content;
+		width: -moz-fit-content;
+		width: -webkit-fit-content;
 		margin: auto;
 	}
 

@@ -66,7 +66,7 @@
 <?php	if (!isset($_GET['kantor']) && ($current_user['level'] < KANTOR_LEVEL || isset($kantor_signed) && $kantor_signed)) { 
 			$kon_author = kon_db('SELECT * FROM kon_user, kon_consultation WHERE login=author_id AND id="' . $kon_field['id'] . '"')->fetch_assoc();
 ?>
-				<div class="col-sm-12 kantor_name"><?php echo $GLOBALS['lang']->other->lector . ': <b title="' . $kon_author['email'] . '">' . $kon_author['last_name'] . ' ' . $kon_author['first_name'] . '</b>'; ?></div>
+				<div class="col-sm-12 kantor_name"><?php echo $GLOBALS['lang']->other->lector . ': <a href="' . HOME_URL . '/?kantor=' . $kon_author['login'] . '">' . (!empty($kon_author['titles_before']) ? $kon_author['titles_before'] . ' ' : '') . $kon_author['last_name'] . ' ' . $kon_author['first_name'] . (!empty($kon_author['titles_before']) ? ' ' . $kon_author['titles_after'] : '') . '</a>'; ?></div>
 <?php	} ?>
 				<div class="col-sm-3">
 					<div class="datum">
@@ -130,6 +130,9 @@
 		$start_time = to_timestamp($kon_field['start_time']);
 		$section_time = to_timestamp($kon_field['section_duration']);
 		$disabled = explode(',', $kon_field['disabled_sections']);
+		$occupied = json_decode($kon_field['occupied_sections'], true);
+		if (empty($occupied))
+			$occupied = array();
 		$section_edit_num = $available;
 		for ($si=0; $si < $kon_field['section_amount']; $si++) {
 

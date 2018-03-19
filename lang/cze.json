@@ -126,7 +126,9 @@
 		"now": "Nyní",
 		"signedToKon": "se přihlásil na konzultaci",
 		"signedOff": "se odhlásil z konzultace",
-		"studNote": "upravil svou poznámku na: {$1}"
+		"studNote": "upravil svou poznámku na: {$1}",
+		"occupiedSec": "obsadil sekci {$1} textem: {$2}",
+		"unoccupiedSec": "uvolnil sekci {$1}"
 	},
 	"infoMsg": {
 		"verifyMailSent": "Na zadanou adresu byl zaslán ověřovací e-mail",
@@ -209,7 +211,8 @@
 		"really": "Opravdu si přejete",
 		"konDelChosen": "Odhlásit vybrané uživatele",
 		"konDelDisChosen": "Odhlásit uživatele a znepřístupnit vybrané úseky",
-		"konNotifDesc": "Upozornit mě zprávou když"
+		"konNotifDesc": "Upozornit mě zprávou když",
+		"occupyPlaceholder": "Obsaďte sekci textem..."
 	},
 	"other": {
 		"confirm": "Potvrdit",

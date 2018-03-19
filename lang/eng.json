@@ -126,7 +126,9 @@
 		"now": "Now",
 		"signedToKon": "has signed on the consultation",
 		"signedOff": "has signed out of the consultation",
-		"studNote": "has changed his note to: {$1}"
+		"studNote": "has changed his note to: {$1}",
+		"occupiedSec": "has filled section {$1} with text: {$2}",
+		"unoccupiedSec": "has enabled section {$1}"
 	},
 	"infoMsg": {
 		"verifyMailSent": "A message has been sent to provided e-mail address",
@@ -209,7 +211,9 @@
 		"really": "Are you sure you want to",
 		"konDelChosen": "Sign out chosen users",
 		"konDelDisChosen": "Sign out chosen users and disable sections",
-		"konNotifDesc": "Notify me with a message when"
+		"konNotifDesc": "Notify me with a message when",
+		"occupyPlaceholder": "Occupy section with text..."
+
 	},
 	"other": {
 		"confirm": "Confirm",

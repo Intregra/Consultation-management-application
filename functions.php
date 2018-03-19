@@ -20,7 +20,7 @@ define('ACTION_CHECK_DELAY', 60);
 define('REMEMBERME_DURATION', 3600*24*90);
 
 // FEEDBACK > 0 shows feedback message and UI to send feedback
-define('FEEDBACK', 0);
+define('FEEDBACK', 1);
 
 // database credentials and local settings
 require 'local_settings.php';
@@ -194,6 +194,7 @@ function create_tables_if_not_exist () {
 			section_duration time,
 			section_amount int(8),
 			disabled_sections varchar(255),
+			occupied_sections text,
 			history text,
 			stud_filter text,
 			room varchar(100)

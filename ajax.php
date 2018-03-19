@@ -350,6 +350,7 @@ function kon_add_section () {
 	$start_time = to_timestamp($kon_row['start_time']);
 	$section_time = to_timestamp($kon_row['section_duration']);
 	$disabled = array();
+	$occupied = array();
 	$is_current_author = true;
 	$section_edit_num = kon_editable_section($_POST['target']);
 
@@ -506,6 +507,11 @@ function sign_to_kon () {
 	$start_time = to_timestamp($kon_row['start_time']);
 	$section_time = to_timestamp($kon_row['section_duration']);
 	$disabled = array();
+	$occupied = $kon_row['occupied_sections'];
+	if (empty($occupied))
+		$occupied = array();
+	else
+		$occupied = json_decode($occupied, true);
 	$si = 0;
 	$chosen_time = to_timestamp($_POST['section'] . ':00');
 	$section_edit_num = kon_editable_section($_POST['target']);
@@ -525,8 +531,9 @@ function sign_to_kon () {
 	// do nothing if user is filtered (currently possible only by forging ajax requests)
 	if (!empty($kon_row['stud_filter']) && !in_array(explode('@', $current_user['email'])[1], explode(',', $kon_row['stud_filter'])))
 		return false;
-
-
+	// do nothing if section is occupied (currently possible only by forging ajax requests)
+	if (array_key_exists($_POST['section'], $occupied))
+		return;
 
 	update_kon_history($_POST['target'], '|lang,ajax,signedToKon');
 	prepare_notification('student_login', $_POST['target'], $current_user, [ 'sections' => [ $_POST['section'] ] ]);
@@ -551,6 +558,7 @@ function signout_from_kon () {
 	$start_time = to_timestamp($kon_row['start_time']);
 	$section_time = to_timestamp($kon_row['section_duration']);
 	$disabled = array();
+	$occupied = array();
 	$si = 0;
 	$chosen_time = to_timestamp($_POST['section'] . ':00');
 	$section_edit_num = kon_editable_section($_POST['target']);
@@ -763,6 +771,26 @@ function submit_new_pass () {
 		kon_db('UPDATE kon_user SET pass="' . password_hash($_POST['pass1'], PASSWORD_BCRYPT) . '", acc_state="ok" WHERE login="' . $current_user['login'] . '"');
 		$_SESSION['top_messages'] = $GLOBALS['lang']->infoMsg->passChanged;
 	}
+}
+
+// enables or disables section by author text (occupy)
+function kon_occupy_section () {
+	if (kon_editable_section($_POST['target']) > 0) {
+		$current_user = get_logged_user();
+		$secs = json_decode(kon_db('SELECT occupied_sections FROM kon_consultation WHERE id=' . $_POST['target'])->fetch_assoc()['occupied_sections'], true);
+		if (empty($secs))
+			$secs = array();
+		if (!empty($_POST['note'])) {
+			$secs[$_POST['section']] = $_POST['note'];
+			update_kon_history($_POST['target'], '|lang,ajax,occupiedSec|' . $_POST['section'] . '|' . history_encode(addslashes($_POST['note'])));
+		} else if (array_key_exists($_POST['section'], $secs)) {
+			unset($secs[$_POST['section']]);
+			update_kon_history($_POST['target'], '|lang,ajax,unoccupiedSec|' . $_POST['section']);
+		}
+		kon_db('UPDATE kon_consultation SET occupied_sections="' . addslashes(json_encode($secs)) . '" WHERE id=' . $_POST['target']);
+		prepare_notification('kon_section_add', $_POST['target'], $current_user, [ 'sections' => [ $_POST['section'] ] ]);
+	}
+	touch_user_action($current_user['login']);
 }
 
 // update stud. filter
