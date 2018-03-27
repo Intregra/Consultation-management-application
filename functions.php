@@ -115,7 +115,10 @@ function to_timestamp ($to_transform, $date='1970-01-01') {
 
 // adjust given timestamp to work properly with current timezone
 function timezone_adjustment ($timestamp) {
-	return $timestamp - date('Z');
+	if (date('I') == '0')
+		return $timestamp - date('Z');
+	else
+		return $timestamp - date('Z') + 3600;
 }
 
 // checks if $nick contains only letters and numbers
