@@ -390,6 +390,40 @@
 		});
 	}
 
+	// whilke eidting consultation make free sections occupyable by text
+	function occupy_kon_sec (elem) {
+		if (typeof elem == 'string') {
+			elem = $(elem);
+			if (elem.length <= 0)
+				return;
+		}
+		elem.each(function () {
+			var occupy_send_timeout = null;
+			var konrow = $(this);
+			konrow.find('.pozn').html('<input type="text" placeholder="' + lang.script.occupyPlaceholder + '" value="' + konrow.find('.pozn').html() + '">');
+			var occupyInput = konrow.find('.pozn input');
+			occupyInput.keyup(function () {
+				clearTimeout(occupy_send_timeout);
+				occupy_send_timeout = setTimeout(function () {
+					if (occupyInput.length > 0)
+						var note_to_send = occupyInput.val();
+					else
+						var note_to_send = konrow.find('.pozn').html();
+					$.post('ajax.php', {
+						call: 'kon_occupy_section',
+						target: get_parent(konrow, '.konzultace').data('konid'),
+						note: note_to_send,
+						section: konrow.find('.cas').html(),
+						sec_tok: sec_tok
+					}).done(function (data) {
+						if (data != 0)
+							$('.main_error_container').html(data);
+					});
+				}, note_send_delay);
+			});
+		});
+	}
+
 	// appends jQuery functionality on elements when loading consultations
 	function init_kon_display () {
 		// kon menu buttons
@@ -466,7 +500,6 @@
 					kon_parent.addClass('editing');
 					var note_send_timeout = null;
 					var room_send_timeout = null;
-					var occupy_send_timeout = null;
 					var kon_popis = kon_parent.find('.kon-popis .kon_descr');
 					kon_popis.html('<textarea placeholder="' + lang.script.konNotePlaceholder + '" rows="1">' + kon_popis.html() + '</textarea>');
 					var popis_textarea = kon_popis.find('textarea');
@@ -484,30 +517,7 @@
 							$(this).css('height', '');
 						});
 					// occupy notes edit
-					kon_parent.find('.kon-row:not(.is_past):not(.user_present):not(.disabled)').each(function () {
-						var konrow = $(this);
-						konrow.find('.pozn').html('<input type="text" placeholder="' + lang.script.occupyPlaceholder + '" value="' + konrow.find('.pozn').html() + '">');
-						var occupyInput = konrow.find('.pozn input');
-						occupyInput.keyup(function () {
-							clearTimeout(occupy_send_timeout);
-							occupy_send_timeout = setTimeout(function () {
-								if (occupyInput.length > 0)
-									var note_to_send = occupyInput.val();
-								else
-									var note_to_send = konrow.find('.pozn').html();
-								$.post('ajax.php', {
-									call: 'kon_occupy_section',
-									target: konID,
-									note: note_to_send,
-									section: konrow.find('.cas').html(),
-									sec_tok: sec_tok
-								}).done(function (data) {
-									if (data != 0)
-										$('.main_error_container').html(data);
-								});
-							}, note_send_delay);
-						});
-					});
+					occupy_kon_sec(kon_parent.find('.kon-row:not(.is_past):not(.user_present):not(.disabled)'));
 					// when writing note, dont send ajax after each key is pressed, instead wait a while
 					popis_textarea.keyup(function () {
 						clearTimeout(note_send_timeout);
@@ -745,6 +755,7 @@
 				if (data) {
 					$('#kon_id_' + konID + ' .kon-row').first().before(data);
 					selectable_kon_rows($('#kon_id_' + konID + ' .kon-row').first());
+					occupy_kon_sec($('#kon_id_' + konID + ' .kon-row').first());
 				}
 			});
 		});
@@ -760,6 +771,7 @@
 				if (data) {
 					$('#kon_id_' + konID + ' .kon-row').last().after(data);
 					selectable_kon_rows($('#kon_id_' + konID + ' .kon-row').last());
+					occupy_kon_sec($('#kon_id_' + konID + ' .kon-row').last());
 				}
 			});
 		});
