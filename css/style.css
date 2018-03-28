@@ -1021,7 +1021,7 @@ input.wrong_val + .input-error {
 
 .konzultace.is_author .kon-row:not(.user_present) .jmeno,
 .konzultace .kon-row.occupied .jmeno {
-	width: 5%;
+	width: 0;
 }
 
 .konzultace.is_past .datum {
@@ -1185,7 +1185,7 @@ input.wrong_val + .input-error {
 
 .kon-row .jmeno {
 	width: 200px;
-	text-align: center;
+	text-align: left;
 }
 
 .kon-row.logged .jmeno {
