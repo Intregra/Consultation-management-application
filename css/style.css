@@ -1022,6 +1022,7 @@ input.wrong_val + .input-error {
 .konzultace.is_author .kon-row:not(.user_present) .jmeno,
 .konzultace .kon-row.occupied .jmeno {
 	width: 0;
+	height: 1px;
 }
 
 .konzultace.is_past .datum {
@@ -1097,18 +1098,18 @@ input.wrong_val + .input-error {
 
 .kon-row {
 	padding: 5px;
-	height: 34px;
+	height: auto;
 	overflow: hidden;
 	position: relative;
 	-webkit-transition: all 0.7s;
 	transition: all 0.7s;
 	background-color: #EEEEEE;
 	border-top: 2px solid white;
-	display: table;
+	display: block;
 	width: 100%;
 }
 
-#main_container:not(.unlogged):not(.stud_not_show) .kon-row:not(.is_past):not(.occupied),
+#main_container:not(.unlogged):not(.stud_not_show) .kon-row:not(.is_past):not(.occupied):not(.user_present),
 .konzultace.is_author .kon-row:not(.is_past),
 .konzultace.is_author .kon-row.is_past.user_present {
 	cursor: pointer;
@@ -1133,8 +1134,9 @@ input.wrong_val + .input-error {
 }
 
 .kon-row > div {
-	display: table-cell;
+	display: inline-block;
 	vertical-align: middle;
+	float: left;
 }
 
 .kon-row .sel-checkbox {
@@ -1186,6 +1188,7 @@ input.wrong_val + .input-error {
 .kon-row .jmeno {
 	width: 200px;
 	text-align: left;
+	padding-left: 20px;
 }
 
 .kon-row.logged .jmeno {
@@ -1197,13 +1200,20 @@ input.wrong_val + .input-error {
 	width: 1px;
 }
 
+.kon-row .pozn {
+	float: none;
+    overflow: hidden;
+    display: block;
+    width: auto;
+}
+
 .kon-row.logged .sign_out span {
 	color: #D50000;
 	font-size: 20px;
 	position: absolute;
 	top: 5px;
 	margin-left: -5px;
-	padding: 0 5px;
+	padding: 0 2px;
 	opacity: 0.4;
 	cursor: pointer;
 	-webkit-transition: all 0.5s;
@@ -1216,13 +1226,13 @@ input.wrong_val + .input-error {
 
 .kon-row.logged .edit_pozn {
 	cursor: pointer;
-	margin-left: -23px;
 	color: #3F51B5;
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
 	opacity: 0.3;
-	padding-left: 26px;
+	padding-left: 20px;
 	width: 20px;
+	height: 5px;
 }
 
 .kon-row.logged .pozn input {
@@ -1437,5 +1447,11 @@ input.wrong_val + .input-error {
 	#profile_edit .form-group.public_view .col-sm-8,
 	#profile_edit .form-group.stud_show .col-sm-8 {
 		text-align: left;
+	}
+}
+
+@media (max-width: 450px) {
+	.kon-row .pozn {
+		float: left;
 	}
 }

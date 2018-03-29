@@ -45,8 +45,14 @@
 		elem.find('.kon-popis').each(function () {
 			var one_kon = $(this);
 			var kroom = one_kon.find('.kon_room');
-			one_kon.find('.kon_room').css('width', '');
-			kroom.width(function (i, w) { return w - one_kon.parent().find('.kon-menu').width(); });
+			kroom.css('width', '');
+			var clone = one_kon.parent().clone();
+			clone.css('display', 'block').css('visibility','hidden');
+			$('body').append(clone);
+			var width1 = clone.find('.kon-menu').outerWidth();
+			var width2 = clone.find('.kon_room').outerWidth();
+			clone.remove();
+			kroom.width(width2 - width1);
 		});
 	}
 
