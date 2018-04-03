@@ -1381,7 +1381,7 @@ input.wrong_val + .input-error {
 @-moz-document url-prefix() {
 	.kon-row.logged .sign_out span,
 	.kon-row.logged .edit_pozn span {
-		top: 8px;
+		top: 6px;
 	}
 }
 
