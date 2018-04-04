@@ -239,7 +239,7 @@ function kon_disable_row () {
 		prepare_notification('kon_section_add', $_POST['target'], $current_user, [ 'sections' => $added_sections ]);
 
 	// handle disable
-	} else if ($_POST['disable'] == 1) {
+	} else {
 		// handle signed users
 		$result = kon_db('SELECT * FROM kon_signed WHERE id=' . $_POST['target']);
 		$kicked_users = [];
@@ -260,57 +260,59 @@ function kon_disable_row () {
 				prepare_notification('student_logout', $_POST['target'], $current_user, [ 'sections' => $kicked_users ]);
 		}
 
-		// disable
-		if (empty($consult_res['disabled_sections']))
-			$disabled_from_db = array();
-		else
-			$disabled_from_db = explode(',', $consult_res['disabled_sections']);
-		$disabled_sections = [];
-		foreach ($sectionsA as $value) {
-			if (!in_array($value, $disabled_from_db)) {
-				array_push($disabled_sections, substr($value, 0, -3));
-				array_push($disabled_from_db, $value);
-			}
-		}
-		// previous values are at the start of the function
-		$section_amount = $consult_res['section_amount'];
-		$last_section = date(TIME_DB_FULL, timezone_adjustment(to_timestamp($start_time) + ($section_amount - 1) * $section_duration));
-		$disabled_another = array();
-		sort($disabled_from_db);
-		// move section from after midnight to the end
-		while ($disabled_from_db[0] < $start_time) {
-			array_push($disabled_from_db, array_splice($disabled_from_db, 0, 1)[0]);
-		}
-		// adjust start if needed
-		for ($i=0; $i < count($disabled_from_db); $i++) {
-			if ($disabled_from_db[$i] == $start_time) {
-				$start_time = date(TIME_DB_FULL, timezone_adjustment(to_timestamp($start_time) + $section_duration));
-				$section_amount--;
-			} else {
-				array_push($disabled_another, $disabled_from_db[$i]);
-			}
-		}
-		$disabled_from_db = array();
-		// adjust end if needed
-		for ($i=count($disabled_another) - 1; $i >= 0; $i--) {
-			if ($disabled_another[$i] == $last_section) {
-				$last_section = date(TIME_DB_FULL, timezone_adjustment(to_timestamp($last_section) - $section_duration));
-				$section_amount--;
-			} else {
-				array_push($disabled_from_db, $disabled_another[$i]);
-			}
-		}
-		// place this back to DB or DELETE consultation if everything was disabled
-		if ($section_amount > 0) {
-			kon_db('UPDATE kon_consultation SET start_time="' . $start_time . '", section_amount=' . $section_amount . ', disabled_sections="' . implode(',', $disabled_from_db) . '" WHERE id=' . $_POST['target']);
-			if (empty($kicked_for_history))
-				update_kon_history($_POST['target'], '|lang,ajax,disabledSec|' . implode(', ', $disabled_sections));
+		if ($_POST['disable'] == 1) {
+			// disable
+			if (empty($consult_res['disabled_sections']))
+				$disabled_from_db = array();
 			else
-				update_kon_history($_POST['target'], '|lang,ajax,disabledSecKick|' . implode(', ', $disabled_sections) . '|' . implode(', ', $kicked_for_history));
-			prepare_notification('kon_section_del', $_POST['target'], $current_user, [ 'sections' => $disabled_sections ]);
-		} else {
-			prepare_notification('kon_delete', $_POST['target'], $current_user);
-			kon_db('DELETE FROM kon_consultation WHERE id=' . $_POST['target']);
+				$disabled_from_db = explode(',', $consult_res['disabled_sections']);
+			$disabled_sections = [];
+			foreach ($sectionsA as $value) {
+				if (!in_array($value, $disabled_from_db)) {
+					array_push($disabled_sections, substr($value, 0, -3));
+					array_push($disabled_from_db, $value);
+				}
+			}
+			// previous values are at the start of the function
+			$section_amount = $consult_res['section_amount'];
+			$last_section = date(TIME_DB_FULL, timezone_adjustment(to_timestamp($start_time) + ($section_amount - 1) * $section_duration));
+			$disabled_another = array();
+			sort($disabled_from_db);
+			// move section from after midnight to the end
+			while ($disabled_from_db[0] < $start_time) {
+				array_push($disabled_from_db, array_splice($disabled_from_db, 0, 1)[0]);
+			}
+			// adjust start if needed
+			for ($i=0; $i < count($disabled_from_db); $i++) {
+				if ($disabled_from_db[$i] == $start_time) {
+					$start_time = date(TIME_DB_FULL, timezone_adjustment(to_timestamp($start_time) + $section_duration));
+					$section_amount--;
+				} else {
+					array_push($disabled_another, $disabled_from_db[$i]);
+				}
+			}
+			$disabled_from_db = array();
+			// adjust end if needed
+			for ($i=count($disabled_another) - 1; $i >= 0; $i--) {
+				if ($disabled_another[$i] == $last_section) {
+					$last_section = date(TIME_DB_FULL, timezone_adjustment(to_timestamp($last_section) - $section_duration));
+					$section_amount--;
+				} else {
+					array_push($disabled_from_db, $disabled_another[$i]);
+				}
+			}
+			// place this back to DB or DELETE consultation if everything was disabled
+			if ($section_amount > 0) {
+				kon_db('UPDATE kon_consultation SET start_time="' . $start_time . '", section_amount=' . $section_amount . ', disabled_sections="' . implode(',', $disabled_from_db) . '" WHERE id=' . $_POST['target']);
+				if (empty($kicked_for_history))
+					update_kon_history($_POST['target'], '|lang,ajax,disabledSec|' . implode(', ', $disabled_sections));
+				else
+					update_kon_history($_POST['target'], '|lang,ajax,disabledSecKick|' . implode(', ', $disabled_sections) . '|' . implode(', ', $kicked_for_history));
+				prepare_notification('kon_section_del', $_POST['target'], $current_user, [ 'sections' => $disabled_sections ]);
+			} else {
+				prepare_notification('kon_delete', $_POST['target'], $current_user);
+				kon_db('DELETE FROM kon_consultation WHERE id=' . $_POST['target']);
+			}
 		}
 	}
 
