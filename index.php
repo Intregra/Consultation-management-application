@@ -69,7 +69,7 @@ HTTPS - musí provozovatel appky vyřešit individuálně
 <?php if (!$current_user || $current_user['login'] != $wanted_user['login'] || $current_user['level'] < KANTOR_LEVEL || $current_user['stud_show'] > 0) { ?>
 			<div id="kantor_selection" class="col-sm-6">
 				<div class="sel_con_part">
-					<label class="kan_sel_input"><span><?php echo $lang->other->lector; ?></span><input type="text" value="<?php if ($wanted_user) echo ($wanted_user['titles_before'] ? $wanted_user['titles_before'] . ' ' : '') . $wanted_user['last_name'] . ' ' . $wanted_user['first_name'] . ($wanted_user['titles_after'] ? ', ' . $wanted_user['titles_after'] : '') . ' <' . $wanted_user['email'] . '>'; ?>"></label>
+					<label class="kan_sel_input"><span><?php echo $lang->other->lector; ?></span><input type="text" value="<?php if ($wanted_user && $wanted_user['level'] >= KANTOR_LEVEL) echo ($wanted_user['titles_before'] ? $wanted_user['titles_before'] . ' ' : '') . $wanted_user['last_name'] . ' ' . $wanted_user['first_name'] . ($wanted_user['titles_after'] ? ', ' . $wanted_user['titles_after'] : '') . ' <' . $wanted_user['email'] . '>'; ?>"></label>
 <?php if ($current_user) { ?>				
 					<a class="look-like-button my_con_btn" href="<?php echo HOME_URL;?>"><?php echo $lang->index->myConsults; ?></a>
 <?php } ?>
