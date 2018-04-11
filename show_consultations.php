@@ -112,7 +112,7 @@
 						<button class="btn_duplicate" title="<?php echo $GLOBALS['lang']->consultation->titleDupli; ?>"><span class="glyphicon glyphicon-duplicate"></span></button>
 <?php } ?>
 						<button class="btn_history" title="<?php echo $GLOBALS['lang']->consultation->titleHistory; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-<?php if ($is_current_author && $available == 0) { ?>
+<?php if ($is_current_author && $available == 1) { ?>
 						<button class="btn_delete" title="<?php echo $GLOBALS['lang']->consultation->titleDel; ?>"><span class="glyphicon glyphicon-trash"></span></button>
 <?php } ?>
 					</div>

@@ -98,7 +98,7 @@ function kon_create_new () {
 			$r_to = $r_from + (to_timestamp($row['section_duration']) * $row['section_amount']);
 			// check if two intervals overlap
 			if ($kon_from < $r_to && $r_from < $kon_to)
-				array_push($errs, repl_str($GLOBALS['lang']->errors->konOverlap, date(DATE_CZ . ' ' . TIME_S, timezone_adjustment($r_from)), date(DATE_CZ . ' ' . TIME_S, timezone_adjustment($r_to))));
+				array_push($errs, repl_str($GLOBALS['lang']->errors->konOverlap, date(DATE_CZ . ' ' . TIME_S, $r_from), date(DATE_CZ . ' ' . TIME_S, $r_to)));
 		}
 		if (!empty($errs)) {
 			echo 'Error' . implode('|', $errs);
@@ -361,7 +361,7 @@ function kon_add_section () {
 			return;
 		$si = 0;
 		$start_time -= $section_time;
-		if (timezone_adjustment($start_time + to_timestamp('00:00:00', $kon_row['execution_date'])) <= time())
+		if ($start_time + to_timestamp('00:00:00', $kon_row['execution_date']) <= time())
 			return;
 	} else {
 		if (kon_editable_section($_POST['target']) < 0)
@@ -395,7 +395,7 @@ function kon_add_section () {
 	if ($_POST['top'] != 0)
 		$new_section = date(TIME_S, timezone_adjustment($start_time));
 	else
-		$new_section = date(TIME_S, timezone_adjustment($start_time + ($kon_row['section_amount'] + 1) * $section_time));
+		$new_section = date(TIME_S, timezone_adjustment($start_time + $kon_row['section_amount'] * $section_time));
 	update_kon_history($_POST['target'], '|lang,ajax,addedSec|' . $new_section);
 	prepare_notification('kon_section_add', $_POST['target'], $current_user, [ 'sections' => [ $new_section ] ]);
 

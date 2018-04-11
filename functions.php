@@ -109,8 +109,11 @@ function kon_db ($sql, $close = 0) {
 }
 
 // with help of strtotime() transforms given string to timestamp
-function to_timestamp ($to_transform, $date='1970-01-01') {
-	return strtotime($date . ' ' . $to_transform . ' UTC');
+function to_timestamp ($to_transform, $date='') {
+	if ($date == '')
+		return strtotime('1970-01-01 ' . $to_transform . ' UTC');
+	else
+		return strtotime($date . ' ' . $to_transform);
 }
 
 // adjust given timestamp to work properly with current timezone
@@ -496,9 +499,9 @@ function kon_editable_section ($konid, $return_time=false) {
 	$kon_start = to_timestamp($result['start_time'], $result['execution_date']);
 	$kon_sec_dur = to_timestamp($result['section_duration']);
 	for ($i = 0; $i < $result['section_amount']; $i++) {
-		if (timezone_adjustment($kon_start + $i * $kon_sec_dur) > $now)
+		if ($kon_start + $i * $kon_sec_dur > $now)
 			if ($return_time)
-				return date(TIME_DB_FULL, timezone_adjustment($kon_start + $i * $kon_sec_dur));
+				return date(TIME_DB_FULL, $kon_start + $i * $kon_sec_dur);
 			else
 				return $i + 1;
 	}
@@ -527,7 +530,7 @@ function send_message ($msg, $recip, $subj, $konid) {
 	
 	$result = kon_db('SELECT * FROM kon_consultation JOIN kon_user ON kon_consultation.author_id=kon_user.login WHERE id=' . $konid)->fetch_assoc();
 	$current_user = get_logged_user();
-	$exectime = date(DATE_CZ . ' ' . TIME_S, timezone_adjustment(to_timestamp($result['start_time'], $result['execution_date'])));
+	$exectime = date(DATE_CZ . ' ' . TIME_S, to_timestamp($result['start_time'], $result['execution_date']));
 
 	$msg .= repl_str($GLOBALS['lang']->messages->sendMsgSignature, $current_user['last_name'], $current_user['first_name'], $result['id'], $exectime, $result['last_name'], $result['first_name']);
 
@@ -728,7 +731,7 @@ function before_send_notification ($target_user) {
 // sends notification
 function real_send_notification ($type, $subj, $msg, $kon_row) {
 	$subj = "=?UTF-8?B?" . base64_encode($subj) . "?=";
-	$exectime = date(DATE_CZ . ' ' . TIME_S, timezone_adjustment(to_timestamp($kon_row['start_time'], $kon_row['execution_date'])));
+	$exectime = date(DATE_CZ . ' ' . TIME_S, to_timestamp($kon_row['start_time'], $kon_row['execution_date']));
 	$kantor = kon_db('SELECT * FROM kon_user WHERE login="' . $kon_row['author_id'] . '"')->fetch_assoc();
 	$msg .= repl_str($GLOBALS['lang']->messages->sendNotifSignature, $kon_row['id'], $exectime, $kantor['last_name'], $kantor['first_name']);
 

@@ -482,7 +482,10 @@
 				times1 = Number(times1[0]*60) + Number(times1[1]); // to minutes
 				times2 = Number(times2[0]*60) + Number(times2[1]); // to minutes
 				times0 = times2 - times1;
-				$('#new_kon_form #section_dur_field').val(Math.floor(times0 / 60) + ':' + times0 % 60);
+				var timeres = times0 % 60;
+				if (timeres < 10);
+					timeres = '0' + timeres.toString();
+				$('#new_kon_form #section_dur_field').val(Math.floor(times0 / 60) + ':' + timeres);
 				// add fields for duplication purposes
 				if (kon_parent.find('.kon-row.is_past').length < 1) {
 					$('#new_kon_form .kon_create_button button:last-of-type').after('<button type="button" class="btn-no">' + lang.script.konDupliDelOrig + '</button>');
