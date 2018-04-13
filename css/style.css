@@ -809,7 +809,7 @@ input.wrong_val + .input-error {
 #scroll_to_top {
 	position: fixed;
 	bottom: 20px;
-	right: 20px;
+	left: 20px;
 }
 
 #scroll_to_top > div {

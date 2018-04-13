@@ -223,6 +223,8 @@
 		"close": "Close",
 		"lector": "Lector",
 		"student": "Student",
-		"storn": "Cancel"
+		"storn": "Cancel",
+		"feedbackTitle": "Feedback",
+		"feedbackDesc": "Your suggestion"
 	}
 }

@@ -222,6 +222,8 @@
 		"close": "Zavřít",
 		"lector": "Kantor",
 		"student": "Student",
-		"storn": "Storno"
+		"storn": "Storno",
+		"feedbackTitle": "Feedback",
+		"feedbackDesc": "Váš podnět"
 	}
 }
