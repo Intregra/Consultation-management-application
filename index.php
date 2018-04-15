@@ -29,19 +29,6 @@ handle_from_param();
 
 ?>
 
-<!--
-
-	TODO
-
-počet pokusů pro heslo
-
-cookies save recent kantors on top of kantor search list
-
-kon_room adjust width
-
-HTTPS - musí provozovatel appky vyřešit individuálně
--->
-
 <?php echo print_info_messages(); ?>
 	<div id="main_content" class="container-fluid">
 
