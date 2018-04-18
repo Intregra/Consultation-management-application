@@ -190,8 +190,8 @@
 		"konSecAddDelSubj": "Přidán/Smazán úsek konzultace",
 		"sendNotifSignature": "{PHP_EOL}____________________________________{PHP_EOL}Zpráva zaslána z aplikace {APP_NAME} {HOME_URL}{PHP_EOL}Konzultace č. {$1}{PHP_EOL}konána {$2}{PHP_EOL}kantorem {$3} {$4}{PHP_EOL}",
 		"konDeleteWithMsg": "Kantor smazal konzultaci",
-		"sutdLogoutApolSubj": "Student se omlouvá",
-		"sutdLogoutApolMsg": "Z konzultace se odhlásil uživatel {$1} {$2} <{$3}> s omluvou:{PHP_EOL}{$4}",
+		"studLogoutApolSubj": "Student se omlouvá",
+		"studLogoutApolMsg": "Z konzultace se odhlásil uživatel {$1} {$2} <{$3}> s omluvou:{PHP_EOL}{$4}",
 		"fromStudSubj": "Zpráva od studenta",
 		"fromKantSubj": "Zpráva od kantora"
 	},

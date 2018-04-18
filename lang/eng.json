@@ -190,8 +190,8 @@
 		"konSecAddDelSubj": "Section added/removed",
 		"sendNotifSignature": "{PHP_EOL}____________________________________{PHP_EOL}Message from application {APP_NAME} {HOME_URL}{PHP_EOL}Consultation no. {$1} on {$2}{PHP_EOL}by lector {$3} {$4}{PHP_EOL}",
 		"konDeleteWithMsg": "Lector has deleted the consultation",
-		"sutdLogoutApolSubj": "Student sends an apology",
-		"sutdLogoutApolMsg": "User {$1} {$2} <{$3}> has signed out from consultation with an apology: {PHP_EOL}{$4}",
+		"studLogoutApolSubj": "Student sends an apology",
+		"studLogoutApolMsg": "User {$1} {$2} <{$3}> has signed out from consultation with an apology: {PHP_EOL}{$4}",
 		"fromStudSubj": "Message from student",
 		"fromKantSubj": "Message from lector"
 	},
