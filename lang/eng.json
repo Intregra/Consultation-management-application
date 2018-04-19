@@ -57,7 +57,7 @@
 		"inWeek": "In a week",
 		"inFewWeeks": "In {$1} weeks",
 		"inMonth": "In more than a month",
-		"titleDisable": "Disable",
+		"titleDisable": "Disable / Kick student",
 		"titleEnable": "Enable",
 		"titleMessage": "Send message",
 		"titleNotif": "Notifications",

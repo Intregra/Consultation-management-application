@@ -57,7 +57,7 @@
 		"inWeek": "Za týden",
 		"inFewWeeks": "Za {$1} týdny",
 		"inMonth": "Za více než měsíc",
-		"titleDisable": "Znepřístupnit",
+		"titleDisable": "Znepřístupnit / Odhlásit studenta",
 		"titleEnable": "Zpřístupnit",
 		"titleMessage": "Poslat zprávu",
 		"titleNotif": "Upozornění",
