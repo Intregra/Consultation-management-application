@@ -483,7 +483,7 @@
 				times2 = Number(times2[0]*60) + Number(times2[1]); // to minutes
 				times0 = times2 - times1;
 				var timeres = times0 % 60;
-				if (timeres < 10);
+				if (timeres < 10)
 					timeres = '0' + timeres.toString();
 				$('#new_kon_form #section_dur_field').val(Math.floor(times0 / 60) + ':' + timeres);
 				// add fields for duplication purposes
