@@ -530,6 +530,11 @@ function sign_to_kon () {
 		return;
 	touch_user_action($current_user['login']);
 
+	// do nothing if someone is already loggen on the section
+	if (kon_db('SELECT login FROM kon_signed WHERE id=' . $_POST['target'] . ' AND section="' . $_POST['section'] . ':00"')->fetch_assoc() != null) {
+		echo '<script> window.location.reload(true); </script>';
+		return;
+	}
 	// do nothing if user is filtered (currently possible only by forging ajax requests)
 	if (!empty($kon_row['stud_filter']) && !in_array(explode('@', $current_user['email'])[1], explode(',', $kon_row['stud_filter'])))
 		return false;
