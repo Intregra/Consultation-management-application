@@ -119,7 +119,7 @@
 
 					<div class="kon-popis">
 						<div class="kon_room"<?php if (empty($kon_field['room'])) echo ' style="height: 0"'; ?>><?php echo '<b>' . $GLOBALS['lang']->index->room . ':</b> <span>' . $kon_field['room'] . '</span>'; ?></div>
-						<div class="kon_descr"><?php echo $kon_field['kantor_note']; ?></div>
+						<div class="kon_descr"><?php echo $kon_field['lector_note']; ?></div>
 					</div>
 <?php if ($is_current_author) { ?>
 					<div class="kon-row-add top-add">

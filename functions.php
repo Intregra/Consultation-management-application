@@ -195,7 +195,7 @@ function create_tables_if_not_exist () {
 			author_id varchar(100),
 			execution_date date,
 			creation_time datetime DEFAULT CURRENT_TIMESTAMP,
-			kantor_note text,
+			lector_note text,
 			start_time time,
 			section_duration time,
 			section_amount int(8),

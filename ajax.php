@@ -75,7 +75,7 @@ function kon_create_new () {
 
 	// append note if set
 	if (!empty($_POST['note'])) {
-		array_push($cols, 'kantor_note');
+		array_push($cols, 'lector_note');
 		array_push($vals, '"' . addslashes($_POST['note']) . '"');
 	}
 
@@ -322,7 +322,7 @@ function kon_disable_row () {
 // edits note of single consultation
 function kon_edit_note () {
 	if (kon_editable_section($_POST['target']) > 0) {
-		kon_db('UPDATE kon_consultation SET kantor_note="' . addslashes($_POST['note']) . '" WHERE id=' . $_POST['target']);
+		kon_db('UPDATE kon_consultation SET lector_note="' . addslashes($_POST['note']) . '" WHERE id=' . $_POST['target']);
 		if ($_POST['note'] === '')
 			update_kon_history($_POST['target'], '|lang,ajax,deletedNote');
 		else
